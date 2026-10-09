@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D & Uniform Management - Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <a href="index.html" class="admin-sidebar-logo">
+        <div class="logo-icon"><img src="../logo.jpeg" alt="Logo" class="nav-logo-img"></div>
+        <div><span class="logo-text">Stitch Room</span><span class="logo-sub">Admin Panel</span></div>
+      </a>
+      <button class="mobile-close-btn" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('adminSidebar').classList.remove('open');" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="admin-nav">
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Central Control</span>
+        <a href="index.html" class="admin-nav-item"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="schools.html" class="admin-nav-item"><i class="fas fa-school"></i> School Management</a>
+        <a href="products.html" class="admin-nav-item"><i class="fas fa-tshirt"></i> Product Catalogue</a>
+        <a href="3d-management.html" class="admin-nav-item active"><i class="fas fa-cube"></i> 3D & Uniform Config</a>
+        <a href="content.html" class="admin-nav-item"><i class="fas fa-desktop"></i> Website Content</a><a href="customer-portal.html" class="admin-nav-item"><i class="fas fa-users"></i> Customer Portal Preview</a>
+        <a href="contacts.html" class="admin-nav-item"><i class="fas fa-envelope"></i> Contacts / Enquiries</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button id="sidebarToggle" class="btn-icon" onclick="document.getElementById('adminSidebar').classList.toggle('open')">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="admin-topbar-title">3D &amp; Uniform Management</div>
+      </div>
+      <div class="admin-topbar-right">
+        <div class="admin-user">
+          <div class="admin-user-avatar" id="userAvatar">A</div>
+          <span class="admin-user-name" id="adminNameDisplay">Admin</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <div style="background:white;padding:25px;border-radius:6px;margin-bottom:25px;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.02);">
+        <h2 style="margin-top:0;font-size:1.2rem;color:#0f172a;">Manage Uniform Configurations by School</h2>
+        <p style="color:#64748b;font-size:0.9rem;margin-bottom:20px;">Assign Junior Boys, Junior Girls, Senior Boys, and Senior Girls 3D models and connect them with products.</p>
+        
+        <div style="display:flex;gap:15px;margin-bottom:20px;align-items:center;">
+          <label style="font-weight:600;color:#0f172a;">Select School:</label>
+          <select id="schoolSelect" class="form-input" style="width:300px;" onchange="loadConfig()">
+            <option value="">-- Choose School --</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Config Cards -->
+      <div id="configArea" style="display:none;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:20px;">
+        
+        <!-- Junior Boys -->
+        <div class="admin-card">
+          <h3 style="color:#1e293b;margin-top:0;"><i class="fas fa-child"></i> Junior Boys Config</h3>
+          <div class="form-group">
+            <label class="form-label">3D Model ID / Asset Link</label>
+            <input type="text" id="jb-model" class="form-input" placeholder="e.g. 3D-VIS-JB-01">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Linked Product (Catalogue ID)</label>
+            <input type="text" id="jb-product" class="form-input" placeholder="e.g. PRD-101">
+          </div>
+        </div>
+
+        <!-- Junior Girls -->
+        <div class="admin-card">
+          <h3 style="color:#1e293b;margin-top:0;"><i class="fas fa-child" style="color:#1e293b;"></i> Junior Girls Config</h3>
+          <div class="form-group">
+            <label class="form-label">3D Model ID / Asset Link</label>
+            <input type="text" id="jg-model" class="form-input" placeholder="e.g. 3D-VIS-JG-01">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Linked Product (Catalogue ID)</label>
+            <input type="text" id="jg-product" class="form-input" placeholder="e.g. PRD-102">
+          </div>
+        </div>
+
+        <!-- Senior Boys -->
+        <div class="admin-card">
+          <h3 style="color:#1e293b;margin-top:0;"><i class="fas fa-user-graduate"></i> Senior Boys Config</h3>
+          <div class="form-group">
+            <label class="form-label">3D Model ID / Asset Link</label>
+            <input type="text" id="sb-model" class="form-input" placeholder="e.g. 3D-VIS-SB-01">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Linked Product (Catalogue ID)</label>
+            <input type="text" id="sb-product" class="form-input" placeholder="e.g. PRD-103">
+          </div>
+        </div>
+
+        <!-- Senior Girls -->
+        <div class="admin-card">
+          <h3 style="color:#1e293b;margin-top:0;"><i class="fas fa-user-graduate"></i> Senior Girls Config</h3>
+          <div class="form-group">
+            <label class="form-label">3D Model ID / Asset Link</label>
+            <input type="text" id="sg-model" class="form-input" placeholder="e.g. 3D-VIS-SG-01">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Linked Product (Catalogue ID)</label>
+            <input type="text" id="sg-product" class="form-input" placeholder="e.g. PRD-104">
+          </div>
+        </div>
+        
+        <div style="grid-column: 1/-1;text-align:right;">
+          <button class="btn btn-primary" onclick="saveConfig()"><i class="fas fa-save"></i> Save Configurations</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  if (sessionStorage.getItem('adminLoggedIn') !== 'true') window.location.href = 'login.html';
+  let schools = [];
+  let configs = JSON.parse(localStorage.getItem('stitch3dConfigs') || '{}');
+
+  async function init() {
+    try {
+      const r = await fetch('../data/schools.json');
+      const d = await r.json();
+      schools = d.schools || [];
+      const sel = document.getElementById('schoolSelect');
+      schools.forEach(s => {
+        sel.innerHTML += `<option value="${s.id}">${s.name}</option>`;
+      });
+    } catch(e) {}
+  }
+
+  function loadConfig() {
+    const id = document.getElementById('schoolSelect').value;
+    const area = document.getElementById('configArea');
+    if(!id) { area.style.display = 'none'; return; }
+    
+    area.style.display = 'grid';
+    const conf = configs[id] || {};
+    document.getElementById('jb-model').value = conf.jb_model || '';
+    document.getElementById('jb-product').value = conf.jb_product || '';
+    document.getElementById('jg-model').value = conf.jg_model || '';
+    document.getElementById('jg-product').value = conf.jg_product || '';
+    document.getElementById('sb-model').value = conf.sb_model || '';
+    document.getElementById('sb-product').value = conf.sb_product || '';
+    document.getElementById('sg-model').value = conf.sg_model || '';
+    document.getElementById('sg-product').value = conf.sg_product || '';
+  }
+
+  function saveConfig() {
+    const id = document.getElementById('schoolSelect').value;
+    if(!id) return;
+    
+    configs[id] = {
+      jb_model: document.getElementById('jb-model').value, jb_product: document.getElementById('jb-product').value,
+      jg_model: document.getElementById('jg-model').value, jg_product: document.getElementById('jg-product').value,
+      sb_model: document.getElementById('sb-model').value, sb_product: document.getElementById('sb-product').value,
+      sg_model: document.getElementById('sg-model').value, sg_product: document.getElementById('sg-product').value
+    };
+    
+    localStorage.setItem('stitch3dConfigs', JSON.stringify(configs));
+    alert('3D Configurations saved successfully!');
+  }
+
+  init();
+  // Mobile sidebar toggle click outside to close
+  document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    if (sidebar && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

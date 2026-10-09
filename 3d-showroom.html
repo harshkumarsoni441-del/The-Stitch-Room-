@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore and rotate 3D school uniform previews for senior and junior students. Compare outfit styles and colours in The Stitch Room's Uniform Studio.">
+  <title>3D Uniform Studio | The Stitch Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/showroom.css">
+  <link rel="stylesheet" href="css/showroom-3d.css">
+  <script src="assets/vendor/three.min.js"></script>
+  <link rel="stylesheet" href="css/site-polish.css">
+</head>
+<body>
+  <nav id="navbar" class="main-header studio-nav">
+    <a href="index.html" class="nav-logo"><span class="logo-icon"><img src="logo.jpeg" alt=""></span><span><span class="logo-text">The Stitch Room</span><span class="logo-sub">Made for every day</span></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="clients.html">Our Clients</a></li><li><a href="modules.html">Uniform Comparison</a></li><li><a href="3d-showroom.html" class="active" aria-current="page">3D Uniform Studio</a></li><li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open navigation"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html"><i class="fas fa-home"></i> Home</a><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a><a href="clients.html"><i class="fas fa-school"></i> Our Clients</a><a href="modules.html"><i class="fas fa-shirt"></i> Uniform Comparison</a><a href="3d-showroom.html" class="active"><i class="fas fa-cube"></i> 3D Uniform Studio</a><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+  </div>
+  <main>
+    <section class="intro">
+      <div class="eyebrow"><span></span> THE STITCH ROOM · UNIFORM STUDIO</div>
+      <h1>See the uniform<br><em>come together.</em></h1>
+      <p>Rotate four student models in 3D, explore uniform styles, and tune the colours to match your school’s identity.</p>
+      <a class="text-link" href="#preview">Enter the 3D studio <i class="fa-solid fa-arrow-down"></i></a>
+      <div class="intro-note"><i class="fa-solid fa-cube"></i><span><b>Built for your first design conversation.</b><br>Choose a model, change the uniform and share a preview with our team.</span></div>
+    </section>
+    <section class="studio" id="preview">
+      <aside class="controls">
+        <div class="control-heading"><div><span class="label">YOUR DESIGN</span><h2>Build a look</h2></div><span class="step">01 <i>/ 03</i></span></div>
+        <label class="field-label" for="school-name">School or organisation</label>
+        <input id="school-name" class="text-input" type="text" placeholder="e.g. Greenfield Academy" maxlength="48">
+        <div class="divider"></div>
+        <span class="field-label">Choose a model</span>
+        <div class="model-picks" role="group" aria-label="Choose a student model">
+          <button class="model-pick active" data-model="senior-boy" aria-pressed="true"><span class="mini-avatar boy">B</span><span>Senior boy</span></button>
+          <button class="model-pick" data-model="senior-girl" aria-pressed="false"><span class="mini-avatar girl">G</span><span>Senior girl</span></button>
+          <button class="model-pick" data-model="junior-boy" aria-pressed="false"><span class="mini-avatar child boy">B</span><span>Junior boy</span></button>
+          <button class="model-pick" data-model="junior-girl" aria-pressed="false"><span class="mini-avatar child girl">G</span><span>Junior girl</span></button>
+        </div>
+        <div class="divider"></div>
+        <label class="field-label" for="outfit-style">Uniform style</label>
+        <select id="outfit-style" class="text-input outfit-select" aria-label="Uniform style"></select>
+        <p class="control-help" id="outfit-note">Common uniform options. Confirm the exact style with your school.</p>
+        <div class="divider"></div>
+        <div class="field-row"><span class="field-label">Shirt colour</span><span class="colour-value" id="shirt-value">Classic white</span></div>
+        <div class="swatches" data-target="shirt" aria-label="Shirt colour">
+          <button class="swatch selected" style="--swatch:#f7f4eb" data-colour="#f7f4eb" data-name="Classic white" aria-label="Classic white"></button>
+          <button class="swatch" style="--swatch:#d8e8e7" data-colour="#d8e8e7" data-name="Pale blue" aria-label="Pale blue"></button>
+          <button class="swatch" style="--swatch:#e5dcbf" data-colour="#e5dcbf" data-name="Sandstone" aria-label="Sandstone"></button>
+          <button class="swatch" style="--swatch:#e6c4bd" data-colour="#e6c4bd" data-name="Soft rose" aria-label="Soft rose"></button>
+          <label class="custom-swatch" title="Choose a custom colour"><i class="fa-solid fa-plus"></i><input type="color" value="#f7f4eb" aria-label="Choose custom shirt colour"></label>
+        </div>
+        <div class="divider"></div>
+        <div class="field-row"><span class="field-label">Model skin tone</span><span class="colour-value" id="skin-value">Warm medium</span></div>
+        <div class="swatches skin-swatches" data-target="skin" aria-label="Model skin tone">
+          <button class="swatch" style="--swatch:#e6bd9d" data-colour="#e6bd9d" data-name="Light warm" aria-label="Light warm skin tone"></button>
+          <button class="swatch selected" style="--swatch:#bf8e6b" data-colour="#bf8e6b" data-name="Warm medium" aria-label="Warm medium skin tone"></button>
+          <button class="swatch" style="--swatch:#9a684c" data-colour="#9a684c" data-name="Rich brown" aria-label="Rich brown skin tone"></button>
+          <button class="swatch" style="--swatch:#674333" data-colour="#674333" data-name="Deep brown" aria-label="Deep brown skin tone"></button>
+        </div>
+        <div class="field-row trouser-row"><span class="field-label">Bottom colour</span><span class="colour-value" id="bottom-value">Deep navy</span></div>
+        <div class="swatches" data-target="bottom" aria-label="Bottom colour">
+          <button class="swatch selected" style="--swatch:#273a50" data-colour="#273a50" data-name="Deep navy" aria-label="Deep navy"></button>
+          <button class="swatch" style="--swatch:#535d4a" data-colour="#535d4a" data-name="Forest olive" aria-label="Forest olive"></button>
+          <button class="swatch" style="--swatch:#343536" data-colour="#343536" data-name="Charcoal" aria-label="Charcoal"></button>
+          <button class="swatch" style="--swatch:#80634c" data-colour="#80634c" data-name="Warm khaki" aria-label="Warm khaki"></button>
+          <label class="custom-swatch" title="Choose a custom colour"><i class="fa-solid fa-plus"></i><input type="color" value="#273a50" aria-label="Choose custom bottom colour"></label>
+        </div>
+        <div class="divider"></div>
+        <div class="field-row"><span class="field-label">Uniform details</span><span class="optional">OPTIONAL</span></div>
+        <div class="detail-options"><button class="detail active" data-detail="tie" aria-pressed="true"><i class="fa-solid fa-grip-lines"></i> Add tie</button><button class="detail" data-detail="blazer" aria-pressed="false"><i class="fa-solid fa-user-tie"></i> Add blazer</button></div>
+        <button class="reset" id="reset"><i class="fa-solid fa-arrow-rotate-left"></i> Reset colours</button>
+      </aside>
+      <div class="preview-panel">
+        <div class="preview-top"><span class="live-dot"></span> LIVE 3D UNIFORM PREVIEW <span class="drag-hint">DRAG TO ROTATE · SCROLL TO ZOOM</span><button id="download" class="icon-button" title="Save preview image" aria-label="Save preview image"><i class="fa-solid fa-arrow-down-to-line"></i></button></div>
+        <div class="preview-stage" id="preview-stage">
+          <div class="stage-orbit orbit-one"></div><div class="stage-orbit orbit-two"></div>
+          <div class="model-caption"><span class="caption-kicker">MODEL 01</span><strong id="model-title">Senior boy</strong><span id="school-caption">YOUR SCHOOL</span></div>
+          <div class="avatar-wrap" id="avatar-wrap" aria-label="Interactive three-dimensional student model"></div>
+          <div class="preview-tip"><i class="fa-solid fa-rotate"></i> Drag the model to turn it · scroll to zoom</div>
+        </div>
+        <div class="preview-bottom"><span><i class="fa-solid fa-circle-info"></i> Colour is for visual guidance; final fabric shades may vary.</span><a href="contact.html">Discuss this look <i class="fa-solid fa-arrow-right"></i></a></div>
+      </div>
+    </section>
+    <section class="closing"><span class="label">FROM FIRST SKETCH TO FINISHED UNIFORM</span><h2>Good uniforms help<br>everyone feel they belong.</h2><a href="contact.html" class="closing-cta">Let’s make yours <i class="fa-solid fa-arrow-right"></i></a></section>
+  </main>
+  <footer><a class="brand" href="index.html"><img src="logo.jpeg" alt=""><span>The Stitch Room<small>MADE FOR EVERY DAY</small></span></a><span>Uniforms made with care in Tamil Nadu.</span><a href="mailto:thestitchroom95@gmail.com">Get in touch <i class="fa-solid fa-arrow-right"></i></a></footer>
+  <script src="js/main.js"></script>
+  <script src="js/showroom.js"></script>
+</body>
+</html>

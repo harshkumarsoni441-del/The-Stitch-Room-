@@ -1,0 +1,6 @@
+<Files "admin.json">
+  Require all denied
+</Files>
+<Files "contacts.json">
+  Require all denied
+</Files>

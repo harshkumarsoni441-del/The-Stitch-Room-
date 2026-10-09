@@ -1,0 +1,472 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Catalogue - Admin Panel | The Stitch Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <a href="index.html" class="admin-sidebar-logo">
+        <div class="logo-icon"><img src="../logo.jpeg" alt="The Stitch Room Logo" class="nav-logo-img"></div>
+        <div>
+          <span class="logo-text">The Stitch Room</span>
+          <span class="logo-sub">Admin Panel</span>
+        </div>
+      </a>
+      <button class="mobile-close-btn" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('adminSidebar').classList.remove('open');" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="admin-nav">
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Main</span>
+        <a href="index.html" class="admin-nav-item"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="schools.html" class="admin-nav-item"><i class="fas fa-school"></i> Schools</a>
+        <a href="products.html" class="admin-nav-item active"><i class="fas fa-tshirt"></i> Products / Catalogue</a>
+        <a href="contacts.html" class="admin-nav-item"><i class="fas fa-envelope"></i> Contacts</a>
+      </div>
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Website</span>
+        <a href="../index.html" target="_blank" class="admin-nav-item"><i class="fas fa-external-link-alt"></i> View Website</a>
+      </div>
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Account</span>
+        <button class="admin-nav-item" onclick="logout()" style="text-align:left;width:100%;color:rgba(239,68,68,0.8);background:transparent;border:none;cursor:pointer;">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button id="sidebarToggle" class="btn-icon" onclick="document.getElementById('adminSidebar').classList.toggle('open')">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="admin-topbar-title">Products &amp; Catalogue</div>
+      </div>
+      <div class="admin-topbar-right">
+        <div class="admin-user">
+          <div class="admin-user-avatar" id="userAvatar">A</div>
+          <span class="admin-user-name" id="adminNameDisplay">Admin</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <div class="admin-content-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:15px;">
+        <div>
+          <h2 style="font-size:1.5rem;font-weight:700;color:#0f172a;margin:0 0 5px;">Catalogue Manager</h2>
+          <p style="color:#64748b;font-size:0.9rem;margin:0;">Manage uniforms, corporate wear, institutional products, and pricing.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openModal()"><i class="fas fa-plus"></i> Add Product</button>
+      </div>
+
+      <div class="admin-card">
+        <div class="table-container">
+          <div class="table-toolbar" style="margin:0;padding-bottom:15px;display:flex;gap:15px;flex-wrap:wrap;">
+            <div class="table-search" style="flex:1;min-width:250px;position:relative;">
+              <i class="fas fa-search" style="position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#94a3b8;"></i>
+              <input type="text" id="productSearch" placeholder="Search products..." oninput="filterTable()" style="width:100%;padding:10px 10px 10px 40px;border:1px solid #e2e8f0;border-radius:8px;">
+            </div>
+            <select id="filterCategory" onchange="filterTable()" class="form-input" style="width:auto;min-width:150px;">
+              <option value="All">All Categories</option>
+              <option value="School Uniform">School Uniform</option>
+              <option value="Corporate">Corporate</option>
+              <option value="Hospital">Hospital</option>
+              <option value="Institutional">Institutional</option>
+            </select>
+          </div>
+          <table class="admin-table" id="productsTable">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>School / Client</th>
+                <th>Category</th>
+                <th>Gender/Classification</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-tbody">
+              <tr><td colspan="7" style="text-align:center;padding:2rem;">Loading products...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Form -->
+<div class="admin-modal-overlay" id="productModal">
+  <div class="admin-modal" style="max-width:800px;width:95%;">
+    <div class="admin-modal-header">
+      <h3 id="modalTitle">Add New Product</h3>
+      <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="admin-modal-body">
+      <form id="productForm" novalidate style="max-height: 65vh; overflow-y: auto; padding-right: 15px;">
+        <input type="hidden" id="productId">
+        
+        <h4 style="margin:0 0 15px; color:#1e293b; font-size:1.1rem; border-bottom:1px solid #eee; padding-bottom:5px;">Basic Details</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Product/Uniform Name *</label>
+            <input type="text" id="pName" class="form-input" placeholder="e.g. Boys Standard Shirt" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">School / Client Association</label>
+            <input type="text" id="pClient" class="form-input" placeholder="e.g. Vellore International School">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select id="pCategory" class="form-input">
+              <option value="School Uniform">School Uniform</option>
+              <option value="Corporate">Corporate</option>
+              <option value="Hospital">Hospital</option>
+              <option value="Institutional">Institutional</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Gender</label>
+            <select id="pGender" class="form-input">
+              <option value="Unisex">Unisex</option>
+              <option value="Boys">Boys / Men</option>
+              <option value="Girls">Girls / Women</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Classification</label>
+            <select id="pClassification" class="form-input">
+              <option value="N/A">N/A</option>
+              <option value="Junior">Junior (KG to 5th)</option>
+              <option value="Senior">Senior (6th to 12th)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Availability / Status</label>
+            <select id="pStatus" class="form-input">
+              <option value="In Stock">In Stock</option>
+              <option value="Made to Order">Made to Order</option>
+              <option value="Out of Stock">Out of Stock</option>
+            </select>
+          </div>
+        </div>
+
+        <h4 style="margin:20px 0 15px; color:#1e293b; font-size:1.1rem; border-bottom:1px solid #eee; padding-bottom:5px;">Attributes & Media</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Sizes (Comma separated)</label>
+            <input type="text" id="pSizes" class="form-input" placeholder="e.g. S, M, L, XL, 32, 34">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Colours (Comma separated)</label>
+            <input type="text" id="pColours" class="form-input" placeholder="e.g. Navy Blue, White">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Material / Fabric Info</label>
+          <input type="text" id="pFabric" class="form-input" placeholder="e.g. 100% Cotton, Poly-Viscose blend">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Primary Image URL</label>
+            <input type="text" id="pImage" class="form-input" placeholder="assets/products/shirt.jpg">
+          </div>
+          <div class="form-group">
+            <label class="form-label">3D Model Association ID</label>
+            <input type="text" id="p3D" class="form-input" placeholder="e.g. 3D-SHIRT-001">
+          </div>
+        </div>
+        
+        <h4 style="margin:20px 0 15px; color:#1e293b; font-size:1.1rem; border-bottom:1px solid #eee; padding-bottom:5px;">Additional Info</h4>
+        <div class="form-group">
+          <label class="form-label">Specifications / Technical Details</label>
+          <textarea id="pSpecs" class="form-input" rows="2" placeholder="e.g. Wash instructions, stitching details"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Full Description</label>
+          <textarea id="pDesc" class="form-input" rows="3" placeholder="Detailed product description..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Related Products (IDs)</label>
+          <input type="text" id="pRelated" class="form-input" placeholder="e.g. 2, 5, 8">
+        </div>
+
+      </form>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="saveBtn" onclick="saveProduct()"><i class="fas fa-save"></i> Save Product</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="admin-modal-overlay" id="confirmDialog">
+  <div class="admin-modal" style="max-width:400px;text-align:center;">
+    <div class="admin-modal-body" style="padding:2rem;">
+      <div style="font-size:3rem;color:var(--color-error);margin-bottom:1rem;"><i class="fas fa-exclamation-triangle"></i></div>
+      <h3 style="margin-bottom:0.5rem;">Delete Product?</h3>
+      <p style="color:var(--text-secondary);margin-bottom:1.5rem;">This action cannot be undone. Are you sure you want to remove this product?</p>
+      <div style="display:flex;gap:1rem;justify-content:center;">
+        <button class="btn btn-outline" onclick="closeConfirm()">Cancel</button>
+        <button class="btn btn-primary" id="confirmDeleteBtn" style="background:var(--color-error);border-color:var(--color-error);" onclick="confirmDeleteProduct()"><i class="fas fa-trash"></i> Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  if (sessionStorage.getItem('adminLoggedIn') !== 'true') window.location.href = 'login.html';
+  const adminName = sessionStorage.getItem('adminName') || 'Admin';
+  document.getElementById('adminNameDisplay').textContent = adminName;
+  document.getElementById('userAvatar').textContent = adminName.charAt(0);
+
+  let products = [];
+  let deleteId = null;
+
+  async function loadProducts() {
+    try {
+      const r = await fetch('../data/products.json');
+      const d = await r.json();
+      products = d.products || [];
+      renderTable(products);
+    } catch (e) {
+      document.getElementById('products-tbody').innerHTML = '<tr><td colspan="7" style="text-align:center;color:rgba(0,0,0,0.4);padding:2rem;">No products found or failed to load. Click "Add Product" to create one.</td></tr>';
+    }
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('products-tbody');
+    if (!data.length) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:rgba(0,0,0,0.4);padding:2rem;">No products found.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = data.map(p => `
+      <tr>
+        <td>
+          <div style="width:40px;height:40px;border-radius:6px;background:#e2e8f0;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            ${p.image ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;">` : `<i class="fas fa-tshirt" style="color:#94a3b8;"></i>`}
+          </div>
+        </td>
+        <td style="font-weight:600;color:#0f172a;">${p.name}</td>
+        <td>${p.client || '-'}</td>
+        <td><span class="badge" style="background:#e0e7ff;color:#4f46e5;">${p.category || 'N/A'}</span></td>
+        <td>${p.gender || 'Unisex'} ${p.classification && p.classification !== 'N/A' ? `(${p.classification})` : ''}</td>
+        <td>
+          <span class="status-badge ${p.status === 'In Stock' ? 'status-new' : (p.status === 'Out of Stock' ? 'status-read' : '')}" style="${p.status === 'Made to Order' ? 'background:#fef3c7;color:#d97706;' : ''}">
+            ${p.status || 'In Stock'}
+          </span>
+        </td>
+        <td>
+          <div class="table-actions">
+            <button class="btn-icon" style="color:#6c63ff;" onclick="editProduct(${p.id})" title="Edit Product"><i class="fas fa-edit"></i></button>
+            <button class="btn-icon" style="color:#ef4444;" onclick="openConfirm(${p.id})" title="Delete Product"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function filterTable() {
+    const q = document.getElementById('productSearch').value.toLowerCase();
+    const cat = document.getElementById('filterCategory').value;
+    const filtered = products.filter(p => 
+      (p.name.toLowerCase().includes(q) || (p.client && p.client.toLowerCase().includes(q))) &&
+      (cat === 'All' || p.category === cat)
+    );
+    renderTable(filtered);
+  }
+
+  function openModal() {
+    document.getElementById('productForm').reset();
+    document.getElementById('productId').value = '';
+    document.getElementById('modalTitle').textContent = 'Add New Product';
+    document.getElementById('productModal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('productModal').classList.remove('open');
+  }
+
+  function editProduct(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('productId').value = p.id;
+    document.getElementById('pName').value = p.name || '';
+    document.getElementById('pClient').value = p.client || '';
+    document.getElementById('pCategory').value = p.category || 'School Uniform';
+    document.getElementById('pGender').value = p.gender || 'Unisex';
+    document.getElementById('pClassification').value = p.classification || 'N/A';
+    document.getElementById('pStatus').value = p.status || 'In Stock';
+    document.getElementById('pSizes').value = p.sizes || '';
+    document.getElementById('pColours').value = p.colours || '';
+    document.getElementById('pFabric').value = p.fabric || '';
+    document.getElementById('pImage').value = p.image || '';
+    document.getElementById('p3D').value = p.config3d || '';
+    document.getElementById('pSpecs').value = p.specs || '';
+    document.getElementById('pDesc').value = p.desc || '';
+    document.getElementById('pRelated').value = p.related || '';
+    document.getElementById('modalTitle').textContent = 'Edit Product';
+    document.getElementById('productModal').classList.add('open');
+  }
+
+  async function saveProduct() {
+    const id = document.getElementById('productId').value;
+    const name = document.getElementById('pName').value.trim();
+    if (!name) { showToast('Product Name is required', 'error'); return; }
+
+    const btn = document.getElementById('saveBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    btn.disabled = true;
+
+    const prodData = {
+      id: id || undefined,
+      name: name,
+      client: document.getElementById('pClient').value.trim(),
+      category: document.getElementById('pCategory').value,
+      gender: document.getElementById('pGender').value,
+      classification: document.getElementById('pClassification').value,
+      status: document.getElementById('pStatus').value,
+      sizes: document.getElementById('pSizes').value.trim(),
+      colours: document.getElementById('pColours').value.trim(),
+      fabric: document.getElementById('pFabric').value.trim(),
+      image: document.getElementById('pImage').value.trim(),
+      config3d: document.getElementById('p3D').value.trim(),
+      specs: document.getElementById('pSpecs').value.trim(),
+      desc: document.getElementById('pDesc').value.trim(),
+      related: document.getElementById('pRelated').value.trim()
+    };
+
+    try {
+      const formData = new FormData();
+      formData.append('product', JSON.stringify(prodData));
+      formData.append('action', id ? 'update' : 'add');
+      const r = await fetch('../php/save-product.php', { method: 'POST', body: formData });
+      if (r.ok) {
+        showToast('Product saved successfully!', 'success');
+        closeModal();
+        loadProducts();
+      } else {
+        fallbackDemoSave(id, prodData);
+      }
+    } catch (e) {
+      fallbackDemoSave(id, prodData);
+    }
+    
+    btn.innerHTML = '<i class="fas fa-save"></i> Save Product';
+    btn.disabled = false;
+  }
+
+  function fallbackDemoSave(id, prodData) {
+    if (id) {
+      const idx = products.findIndex(x => x.id === parseInt(id));
+      if (idx > -1) products[idx] = { ...products[idx], ...prodData };
+    } else {
+      prodData.id = products.length > 0 ? Math.max(...products.map(x => x.id)) + 1 : 1;
+      products.push(prodData);
+    }
+    renderTable(products);
+    showToast(id ? 'Product updated (demo mode)!' : 'Product added (demo mode)!', 'success');
+    closeModal();
+  }
+
+  function openConfirm(id) { deleteId = id; document.getElementById('confirmDialog').classList.add('open'); }
+  function closeConfirm() { deleteId = null; document.getElementById('confirmDialog').classList.remove('open'); }
+  
+  async function confirmDeleteProduct() {
+    if (!deleteId) return;
+    const btn = document.getElementById('confirmDeleteBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    btn.disabled = true;
+
+    try {
+      const formData = new FormData();
+      formData.append('id', deleteId);
+      const r = await fetch('../php/delete-product.php', { method: 'POST', body: formData });
+      if (r.ok) {
+        showToast('Product deleted successfully!', 'success');
+        closeConfirm();
+        loadProducts();
+      } else {
+        fallbackDemoDelete();
+      }
+    } catch (e) {
+      fallbackDemoDelete();
+    }
+    btn.innerHTML = '<i class="fas fa-trash"></i> Delete';
+    btn.disabled = false;
+  }
+
+  function fallbackDemoDelete() {
+    products = products.filter(x => x.id !== deleteId);
+    renderTable(products);
+    showToast('Product deleted (demo mode)!', 'success');
+    closeConfirm();
+  }
+
+  function showToast(msg, type = 'success') {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i><span>${msg}</span>`;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('show')));
+    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
+  }
+  function logout() { sessionStorage.removeItem('adminLoggedIn'); window.location.href = 'login.html'; }
+  function checkMobile() { const t = document.getElementById('sidebarToggle'); if(t) t.style.display = window.innerWidth <= 768 ? 'flex' : 'none'; }
+  window.addEventListener('resize', checkMobile); checkMobile();
+  document.getElementById('productModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+  loadProducts();
+  // Mobile sidebar toggle click outside to close
+  document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    if (sidebar && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

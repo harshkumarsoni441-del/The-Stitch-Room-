@@ -1,0 +1,466 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Schools - Admin Panel | The Stitch Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <a href="index.html" class="admin-sidebar-logo">
+        <div class="logo-icon"><img src="../logo.jpeg" alt="The Stitch Room Logo" class="nav-logo-img"></div>
+        <div>
+          <span class="logo-text">The Stitch Room</span>
+          <span class="logo-sub">Admin Panel</span>
+        </div>
+      </a>
+      <button class="mobile-close-btn" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('adminSidebar').classList.remove('open');" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="admin-nav">
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Main</span>
+        <a href="index.html" class="admin-nav-item"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="schools.html" class="admin-nav-item active"><i class="fas fa-school"></i> Schools</a>
+        <a href="contacts.html" class="admin-nav-item"><i class="fas fa-envelope"></i> Contacts</a>
+      </div>
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Website</span>
+        <a href="../index.html" target="_blank" class="admin-nav-item"><i class="fas fa-external-link-alt"></i> View Website</a>
+      </div>
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Account</span>
+        <button class="admin-nav-item" onclick="logout()" style="text-align:left;width:100%;color:rgba(239,68,68,0.8);">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button class="btn-icon" id="sidebarToggle"    onclick="document.getElementById('adminSidebar').classList.toggle('open')">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="admin-topbar-title">Manage Schools</div>
+      </div>
+      <div class="admin-topbar-right">
+        <button class="btn btn-primary btn-sm" onclick="openAddModal()">
+          <i class="fas fa-plus"></i> Add School
+        </button>
+        <div class="admin-user">
+          <div class="admin-user-avatar" id="userAvatar">A</div>
+          <span class="admin-user-name" id="adminNameDisplay">Admin</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3 class="admin-card-title"><i class="fas fa-school" style="color:#6c63ff;margin-right:0.5rem;"></i>All Schools (<span id="school-count">0</span>)</h3>
+          <div class="table-toolbar" style="margin:0;">
+            <div class="table-search">
+              <i class="fas fa-search"></i>
+              <input type="text" id="schoolSearch" placeholder="Search schools..." oninput="filterTable(this.value)">
+            </div>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="admin-table" id="schoolsTable">
+                          <thead>
+                <tr>
+                  <th>Logo</th>
+                  <th>School Name</th>
+                  <th>City</th>
+                  <th>Contact</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+            <tbody id="schools-tbody">
+              <tr><td colspan="7" style="text-align:center;padding:3rem;"><div class="canvas-loading-spinner" style="margin:0 auto;"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="admin-modal-overlay" id="schoolModal">
+  <div class="admin-modal">
+    <div class="admin-modal-header">
+      <h3 id="modalTitle">Add New School</h3>
+      <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="admin-modal-body">
+            <form id="schoolForm" novalidate style="max-height: 60vh; overflow-y: auto; padding-right: 10px;">
+        <input type="hidden" id="schoolId">
+        
+        <h4 style="margin:0 0 15px; color:#1e293b; font-size:1.1rem; border-bottom:1px solid #eee; padding-bottom:5px;">Basic Information & Location</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">School Name *</label>
+            <input type="text" id="schoolName" class="form-input" placeholder="Full school name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">City *</label>
+            <input type="text" id="schoolCity" class="form-input" placeholder="City" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Contact Email *</label>
+            <input type="email" id="schoolEmail" class="form-input" placeholder="info@school.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contact Phone</label>
+            <input type="tel" id="schoolPhone" class="form-input" placeholder="+91 XXXXX XXXXX">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Address *</label>
+          <input type="text" id="schoolAddress" class="form-input" placeholder="Full street address" required>
+        </div>
+
+        <h4 style="margin:20px 0 15px; color:#1e293b; font-size:1.1rem; border-bottom:1px solid #eee; padding-bottom:5px;">Branding & Status</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">School Logo URL</label>
+            <input type="text" id="schoolLogo" class="form-input" placeholder="e.g. assets/logos/school.png">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Brand Color</label>
+            <input type="color" id="schoolColor" class="form-input" value="#0f172a" style="padding: 2px; height: 40px; cursor: pointer;">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">School Status</label>
+            <select id="schoolStatus" class="form-input premium-select">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Uniform Categories (Comma separated)</label>
+            <input type="text" id="schoolCategories" class="form-input" placeholder="e.g. Junior Boys, Senior Girls">
+          </div>
+        </div>
+
+        <h4 style="margin:20px 0 15px; color:#1e293b; font-size:1.1rem; border-bottom:1px solid #eee; padding-bottom:5px;">Catalogue & 3D Integration</h4>
+        <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">* Adding a school is a data-management operation. Uniforms and 3D configs can be mapped in their respective modules once the school is saved.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Uniform Catalogue Link</label>
+            <input type="text" id="schoolCatalogue" class="form-input" placeholder="Internal catalogue ID or URL">
+          </div>
+          <div class="form-group">
+            <label class="form-label">3D Configurations ID</label>
+            <input type="text" id="school3D" class="form-input" placeholder="e.g. 3D-SCH-001">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary btn-sm" onclick="saveSchool()" id="saveSchoolBtn">
+        <i class="fas fa-save"></i> Save School
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM DELETE DIALOG -->
+<div class="confirm-dialog" id="confirmDialog">
+  <div class="confirm-dialog-box">
+    <div class="confirm-dialog-icon">🗑️</div>
+    <div class="confirm-dialog-title">Delete School?</div>
+    <div class="confirm-dialog-text">This action cannot be undone. The school will be permanently removed from the list.</div>
+    <div class="confirm-dialog-actions">
+      <button class="btn btn-outline btn-sm" onclick="closeConfirm()">Cancel</button>
+      <button class="btn btn-sm" style="background:rgba(239,68,68,0.8);color:white;" onclick="confirmDeleteSchool()" id="confirmDeleteBtn">
+        <i class="fas fa-trash"></i> Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  if (sessionStorage.getItem('adminLoggedIn') !== 'true') window.location.href = 'login.html';
+
+  const adminName = sessionStorage.getItem('adminName') || 'Admin';
+  document.getElementById('adminNameDisplay').textContent = adminName;
+  document.getElementById('userAvatar').textContent = adminName.charAt(0);
+
+  let schools = [];
+  let deleteId = null;
+
+  async function loadSchools() {
+    try {
+      const r = await fetch('../data/schools.json');
+      const d = await r.json();
+      schools = d.schools || [];
+      renderTable(schools);
+    } catch (e) {
+      document.getElementById('schools-tbody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:rgba(239,68,68,0.6);padding:2rem;">Failed to load schools data.</td></tr>';
+    }
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('schools-tbody');
+    const countEl = document.getElementById('school-count');
+    if (countEl) countEl.textContent = data.length;
+    
+    if (!data.length) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:rgba(0,0,0,0.4);padding:2rem;">No schools found.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = data.map(s => `
+      <tr>
+        <td>
+          <div style="width:40px;height:40px;border-radius:8px;background:${s.color || '#e2e8f0'};display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;overflow:hidden;">
+            ${s.logo ? `<img src="${s.logo}" style="width:100%;height:100%;object-fit:cover;">` : s.name.charAt(0)}
+          </div>
+        </td>
+        <td style="font-weight:600;color:rgba(0,0,0,0.8);">${s.name}</td>
+        <td>${s.city}</td>
+        <td>
+          <div style="font-size:0.85rem;">
+            ${s.email ? `<a href="mailto:${s.email}" style="color:#1e293b;">${s.email}</a><br>` : ''}
+            ${s.phone ? `<span>${s.phone}</span>` : ''}
+          </div>
+        </td>
+        <td><span class="status-badge ${s.status === 'Active' ? 'status-new' : 'status-read'}">${s.status || 'Active'}</span></td>
+        <td>
+          <div class="table-actions">
+            <button class="btn-icon" style="color:#6c63ff;" onclick="editSchool(${s.id})" title="Edit School"><i class="fas fa-edit"></i></button>
+            <button class="btn-icon" style="color:#ef4444;" onclick="openConfirm(${s.id})" title="Delete School"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function filterTable(query) {
+    const q = query.toLowerCase();
+    const filtered = schools.filter(s =>
+      s.name.toLowerCase().includes(q) ||
+      s.city.toLowerCase().includes(q)
+    );
+    renderTable(filtered);
+  }
+
+  function openModal() {
+    document.getElementById('schoolForm').reset();
+    document.getElementById('schoolId').value = '';
+    document.getElementById('schoolColor').value = '#0f172a';
+    document.getElementById('schoolStatus').value = 'Active';
+    document.getElementById('modalTitle').textContent = 'Add New School';
+    document.getElementById('schoolModal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('schoolModal').classList.remove('open');
+  }
+
+  function editSchool(id) {
+    const school = schools.find(s => s.id === id);
+    if (!school) return;
+    
+    document.getElementById('schoolId').value = school.id;
+    document.getElementById('schoolName').value = school.name || '';
+    document.getElementById('schoolCity').value = school.city || '';
+    document.getElementById('schoolEmail').value = school.email || '';
+    document.getElementById('schoolPhone').value = school.phone || '';
+    document.getElementById('schoolAddress').value = school.address || '';
+    document.getElementById('schoolLogo').value = school.logo || '';
+    document.getElementById('schoolColor').value = school.color || '#0f172a';
+    document.getElementById('schoolStatus').value = school.status || 'Active';
+    document.getElementById('schoolCategories').value = school.categories || '';
+    document.getElementById('schoolCatalogue').value = school.catalogue || '';
+    document.getElementById('school3D').value = school.config3d || '';
+
+    document.getElementById('modalTitle').textContent = 'Edit School';
+    document.getElementById('schoolModal').classList.add('open');
+  }
+
+  async function saveSchool() {
+    const id = document.getElementById('schoolId').value;
+    const name = document.getElementById('schoolName').value.trim();
+    const city = document.getElementById('schoolCity').value.trim();
+
+    if (!name || !city) {
+      showToast('Name and City are required.', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('saveBtn');
+    btn.innerHTML = '<span class="canvas-loading-spinner" style="width:14px;height:14px;border-width:2px;"></span>';
+    btn.disabled = true;
+
+    const schoolData = {
+      id: id || undefined,
+      name: name,
+      city: city,
+      email: document.getElementById('schoolEmail').value.trim(),
+      phone: document.getElementById('schoolPhone').value.trim(),
+      address: document.getElementById('schoolAddress').value.trim(),
+      logo: document.getElementById('schoolLogo').value.trim(),
+      color: document.getElementById('schoolColor').value,
+      status: document.getElementById('schoolStatus').value,
+      categories: document.getElementById('schoolCategories').value.trim(),
+      catalogue: document.getElementById('schoolCatalogue').value.trim(),
+      config3d: document.getElementById('school3D').value.trim()
+    };
+
+    try {
+      const formData = new FormData();
+      formData.append('school', JSON.stringify(schoolData));
+      formData.append('action', id ? 'update' : 'add');
+
+      const r = await fetch('../php/save-school.php', { method: 'POST', body: formData });
+      if (r.ok) {
+        const data = await r.json();
+        if (data.success) {
+          showToast(data.message, 'success');
+          closeModal();
+          loadSchools();
+          btn.innerHTML = '<i class="fas fa-save"></i> Save School';
+          btn.disabled = false;
+          return;
+        } else {
+          showToast(data.message, 'error');
+        }
+      }
+    } catch (e) {}
+
+    // Demo fallback
+    if (id) {
+      const idx = schools.findIndex(s => s.id === parseInt(id));
+      if (idx > -1) schools[idx] = { ...schools[idx], ...schoolData };
+    } else {
+      schoolData.id = schools.length > 0 ? Math.max(...schools.map(s => s.id)) + 1 : 1;
+      schools.push(schoolData);
+    }
+    renderTable(schools);
+    showToast(id ? 'School updated (demo mode)!' : 'School added (demo mode)!', 'success');
+    closeModal();
+    btn.innerHTML = '<i class="fas fa-save"></i> Save School';
+    btn.disabled = false;
+  }
+
+  function openConfirm(id) {
+    deleteId = id;
+    document.getElementById('confirmDialog').classList.add('open');
+  }
+
+  function closeConfirm() {
+    deleteId = null;
+    document.getElementById('confirmDialog').classList.remove('open');
+  }
+
+  async function confirmDeleteSchool() {
+    if (!deleteId) return;
+
+    const btn = document.getElementById('confirmDeleteBtn');
+    btn.innerHTML = '<span class="canvas-loading-spinner" style="width:14px;height:14px;border-width:2px;"></span>';
+    btn.disabled = true;
+
+    try {
+      const formData = new FormData();
+      formData.append('id', deleteId);
+      const r = await fetch('../php/delete-school.php', { method: 'POST', body: formData });
+      if (r.ok) {
+        const data = await r.json();
+        if (data.success) {
+          showToast('School deleted successfully!', 'success');
+          closeConfirm();
+          loadSchools();
+          btn.innerHTML = '<i class="fas fa-trash"></i> Delete';
+          btn.disabled = false;
+          return;
+        }
+      }
+    } catch (e) {}
+
+    schools = schools.filter(s => s.id !== deleteId);
+    renderTable(schools);
+    showToast('School deleted (demo mode)!', 'success');
+    closeConfirm();
+    btn.innerHTML = '<i class="fas fa-trash"></i> Delete';
+    btn.disabled = false;
+  }
+
+  function showToast(msg, type = 'success') {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i><span>${msg}</span>`;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('show')));
+    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
+  }
+
+  function logout() {
+    sessionStorage.removeItem('adminLoggedIn');
+    sessionStorage.removeItem('adminName');
+    window.location.href = 'login.html';
+  }
+
+  function checkMobile() {
+    const t = document.getElementById('sidebarToggle');
+    if (t) t.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+
+  document.getElementById('schoolModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  loadSchools();
+  // Mobile sidebar toggle click outside to close
+  document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    if (sidebar && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Portal - Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    /* Add the specific styles from customer dashboard to work within admin */
+    .view-section { display: none; }
+    .view-section.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card { min-width: 0 !important; width: 100% !important; box-sizing: border-box !important; } .dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+    .card { background: white; padding: 25px; border-radius: 6px; box-shadow: none; border: 1px solid rgba(0,0,0,0.04); }
+    .card h3 { margin: 0 0 10px; color: #64748b; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; }
+    .card .value { font-size: 2rem; font-weight: 700; color: #0f172a; }
+
+    .cat-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .cat-tab { padding: 10px 20px; background: white; border: 1px solid #e2e8f0; border-radius: 4px; cursor: pointer; font-weight: 500; color: #475569; transition: 0.2s; }
+    .cat-tab.active { background: #6c63ff; color: white; border-color: #6c63ff; }
+    
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .product-card { background: white; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; transition: 0.3s; cursor: pointer; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .product-img { height: 180px; background: #f8fafc; display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 3rem; }
+    .product-info { padding: 15px; }
+    .product-cat { font-size: 0.75rem; color: #6c63ff; font-weight: 600; text-transform: uppercase; margin-bottom: 5px; }
+    .product-title { font-weight: 600; color: #0f172a; margin-bottom: 10px; font-size: 1.05rem; }
+    
+    table.orders { width: 100%; border-collapse: collapse; background: white; border-radius: 6px; overflow: hidden; box-shadow: none; }
+    table.orders th, table.orders td { padding: 15px; text-align: left; border-bottom: 1px solid #f1f5f9; }
+    table.orders th { background: #f8fafc; color: #475569; font-weight: 600; }
+  
+    /* CUSTOMER PORTAL MOBILE RESPONSIVE OVERRIDES */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
+        padding: 15px !important;
+      }
+      .header .user-info {
+        width: 100% !important;
+        justify-content: flex-start !important;
+      }
+      .header .user-info > div:first-child {
+        text-align: left !important;
+      }
+      .card { min-width: 0 !important; width: 100% !important; box-sizing: border-box !important; } .dashboard-cards {
+        grid-template-columns: 1fr !important;
+      }
+      .product-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .cat-tabs {
+        flex-wrap: wrap !important;
+      }
+      .cat-tab {
+        flex: 1 1 calc(50% - 10px);
+        text-align: center;
+        font-size: 0.85rem;
+        padding: 8px 10px;
+      }
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <a href="index.html" class="admin-sidebar-logo">
+        <div class="logo-icon"><img src="../logo.jpeg" alt="Logo" class="nav-logo-img"></div>
+        <div><span class="logo-text">Stitch Room</span><span class="logo-sub">Admin Panel</span></div>
+      </a>
+      <button class="mobile-close-btn" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('adminSidebar').classList.remove('open');" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="admin-nav">
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Central Control</span>
+        <a href="index.html" class="admin-nav-item"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="schools.html" class="admin-nav-item"><i class="fas fa-school"></i> School Management</a>
+        <a href="products.html" class="admin-nav-item"><i class="fas fa-tshirt"></i> Product Catalogue</a>
+        <a href="3d-management.html" class="admin-nav-item"><i class="fas fa-cube"></i> 3D & Uniform Config</a>
+        <a href="content.html" class="admin-nav-item"><i class="fas fa-desktop"></i> Website Content</a><a href="customer-portal.html" class="admin-nav-item"><i class="fas fa-users"></i> Customer Portal Preview</a>
+        <a href="contacts.html" class="admin-nav-item"><i class="fas fa-envelope"></i> Contacts / Enquiries</a>
+        <a href="customer-portal.html" class="admin-nav-item active"><i class="fas fa-users"></i> Customer Portal</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main" style="background:#f1f5f9;">
+    <!-- INJECTED CUSTOMER CODE -->
+    <div class="admin-topbar" style="margin-bottom: 20px;">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button id="sidebarToggle" class="btn-icon" onclick="document.getElementById('adminSidebar').classList.toggle('open')">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="admin-topbar-title">Portal Preview</div>
+      </div>
+      <div class="admin-topbar-right">
+        <div class="admin-user">
+          <div class="admin-user-avatar" id="adminUserAvatar">A</div>
+          <span class="admin-user-name" id="adminNameDisplay">Admin</span>
+        </div>
+      </div>
+    </div>
+    <div class="header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; background:white; padding:15px 25px; border-radius:6px; border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.02);">
+      <div class="header-school" style="font-weight:600; color:#6c63ff; display:flex; align-items:center; gap:8px;"><i class="fas fa-school"></i> <span id="userSchoolDisplay">Vellore International School</span></div>
+      <div class="user-info" style="display:flex; align-items:center; gap:15px;">
+        <div style="text-align: right;">
+          <div style="font-weight: 600; color: #0f172a;" id="userNameDisplay">Demo Parent</div>
+          <div style="font-size: 0.8rem; color: #64748b;">Customer</div>
+        </div>
+        <div class="user-avatar" id="userAvatar" style="width:42px; height:42px; background:#2563eb; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">D</div>
+      </div>
+    </div>
+
+    <!-- CUSTOMER TABS FOR ADMIN TO NAVIGATE -->
+    <div style="margin-bottom: 20px; display:flex; gap:10px; flex-wrap:wrap;">
+      <button class="cat-tab active" onclick="switchView('dashboard', this)">Dashboard</button>
+      <button class="cat-tab" onclick="switchView('catalogue', this)">School Catalogue</button>
+      <button class="cat-tab" onclick="switchView('orders', this)">Orders</button>
+      <button class="cat-tab" onclick="switchView('profile', this)">Profile</button>
+    </div>
+
+    <!-- DASHBOARD VIEW -->
+    <div id="view-dashboard" class="view-section active">
+      <h2 style="margin-bottom: 20px; color: #0f172a; margin-top:0;">Welcome to your Portal</h2>
+      
+      <div class="dashboard-cards">
+        <div class="card">
+          <h3>Catalogue Items</h3>
+          <div class="value" id="stat-items">1</div>
+        </div>
+        <div class="card">
+          <h3>Recent Orders</h3>
+          <div class="value">0</div>
+        </div>
+        <div class="card" style="background: #f1f5f9; border: 1px solid #e2e8f0; color: #0f172a;">
+          <h3 style="color: #475569;">School Announcements</h3>
+          <div style="font-size: 1.1rem; font-weight: 500; margin-top: 10px;">
+            <i class="fas fa-bullhorn"></i> New winter uniforms are now available for preorder.
+          </div>
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div class="card" style="flex: 2; min-width: 300px;">
+          <h3 style="margin-bottom: 15px; color: #0f172a; font-size: 1.2rem; margin-top:0;"><i class="fas fa-info-circle" style="color: #6c63ff;"></i> Important Information</h3>
+          <p style="color: #475569; line-height: 1.6;">
+            Please ensure all measurements are verified before placing an order. Exchanges are accepted within 7 days of delivery for standard sizes only. Custom tailored items cannot be returned.
+          </p>
+          <button class="cat-tab" style="margin-top: 15px; background: #2563eb; color: white; border: none;" onclick="document.querySelectorAll('.cat-tab')[1].click()">View Catalogue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATALOGUE VIEW -->
+    <div id="view-catalogue" class="view-section">
+      <h2 style="margin-bottom: 20px; color: #0f172a; margin-top:0;">School Uniform Catalogue</h2>
+      
+      <div class="cat-tabs" id="cat-tabs">
+        <div class="cat-tab active" onclick="filterCatalogue('All', this)">All Categories</div>
+        <div class="cat-tab" onclick="filterCatalogue('Junior Boys', this)">Junior Boys</div>
+        <div class="cat-tab" onclick="filterCatalogue('Junior Girls', this)">Junior Girls</div>
+        <div class="cat-tab" onclick="filterCatalogue('Senior Boys', this)">Senior Boys</div>
+        <div class="cat-tab" onclick="filterCatalogue('Senior Girls', this)">Senior Girls</div>
+      </div>
+
+      <div class="product-grid" id="product-grid">
+        <div class="product-card" onclick="alert('Product details preview.')">
+          <div class="product-img">
+            <i class="fas fa-tshirt"></i>
+          </div>
+          <div class="product-info">
+            <div class="product-cat">Junior Boys</div>
+            <div class="product-title">Boys Standard Shirt</div>
+            <div style="font-size:0.85rem; color:#64748b;"><i class="fas fa-check-circle" style="color:#10b981;"></i> In Stock</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDERS VIEW -->
+    <div id="view-orders" class="view-section">
+      <h2 style="margin-bottom: 20px; color: #0f172a; margin-top:0;">Orders &amp; Enquiries</h2>
+      <div style="overflow-x:auto;"><table class="orders">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="5" style="text-align: center; color: #94a3b8; padding: 30px;">No recent orders found.</td>
+          </tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- PROFILE VIEW -->
+    <div id="view-profile" class="view-section">
+      <h2 style="margin-bottom: 20px; color: #0f172a; margin-top:0;">My Profile</h2>
+      <div class="card" style="max-width: 500px;">
+        <div style="margin-bottom: 15px;">
+          <label style="display:block; color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Full Name</label>
+          <input type="text" id="profName" style="width:100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; box-sizing: border-box;" value="Demo Parent" readonly="">
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display:block; color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Email Address</label>
+          <input type="text" id="profEmail" style="width:100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; box-sizing: border-box;" value="parent@demo.com" readonly="">
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display:block; color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Assigned School</label>
+          <input type="text" id="profSchool" style="width:100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #f8fafc; color: #6c63ff; font-weight: 600; box-sizing: border-box;" value="Vellore International School" readonly="">
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  if (sessionStorage.getItem('adminLoggedIn') !== 'true') window.location.href = 'login.html';
+  
+  function switchView(viewId, btn) {
+    document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + viewId).classList.add('active');
+    
+    // For the main tabs
+    if(btn && btn.parentElement.children[0].classList.contains('cat-tab') && !btn.parentElement.id) {
+        btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+  }
+
+  function filterCatalogue(cat, btn) {
+    document.querySelectorAll('#cat-tabs .cat-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  // Mobile sidebar toggle click outside to close
+  document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    if (sidebar && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - The Stitch Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="admin-body">
+
+<!-- Background orbs -->
+<div style="position:fixed;inset:0;pointer-events:none;z-index:0;">
+  </div>
+
+<div class="admin-login-page" style="position:relative;z-index:1;">
+  <div class="admin-login-card" data-reveal="zoom" class="revealed" style="opacity:1; transform:none;">
+
+    <div class="admin-login-header">
+      <div class="admin-login-icon"><img src="logo.jpeg" alt="The Stitch Room Logo" class="nav-logo-img" style="width: 100%; height: 100%; object-fit: contain; display: block; background: #1e3a8a; border-radius: 8px; padding: 5px;"></div>
+      <h2>Admin Login</h2>
+      <p>Sign in to The Stitch Room admin panel</p>
+    </div>
+
+    <div class="admin-login-error" id="loginError">
+      <i class="fas fa-exclamation-circle"></i> <span id="loginErrorMsg">Invalid username or password.</span>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="username">
+          <i class="fas fa-user" style="color:#6c63ff;margin-right:0.4rem;"></i> Username
+        </label>
+        <input type="text" id="username" name="username" class="form-input"
+          placeholder="Enter username" autocomplete="username" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">
+          <i class="fas fa-lock" style="color:#6c63ff;margin-right:0.4rem;"></i> Password
+        </label>
+        <div style="position:relative;">
+          <input type="password" id="password" name="password" class="form-input"
+            placeholder="Enter password" autocomplete="current-password" required
+            style="padding-right:3rem;">
+          <button type="button" id="togglePwd" title="Show/hide password"
+            style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(0,0,0,0.4);cursor:pointer;font-size:1rem;padding:0;">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="form-submit-btn" id="loginBtn" style="margin-top:0.5rem;">
+        <span class="btn-text"><i class="fas fa-sign-in-alt"></i>&nbsp; Sign In</span>
+        <span class="btn-spinner"></span>
+      </button>
+    </form>
+
+    <div style="margin-top:1.5rem;text-align:center;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,0.08);">
+      <a href="../index.html" style="font-size:0.85rem;color:rgba(0,0,0,0.4);transition:color 0.2s;">
+        <i class="fas fa-arrow-left" style="margin-right:0.4rem;"></i> Back to Website
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Check if already logged in
+  if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+    window.location.href = 'index.html';
+  }
+
+  const form = document.getElementById('loginForm');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginError = document.getElementById('loginError');
+  const togglePwd = document.getElementById('togglePwd');
+  const pwdInput = document.getElementById('password');
+
+  // Toggle password visibility
+  togglePwd.addEventListener('click', () => {
+    const isText = pwdInput.type === 'text';
+    pwdInput.type = isText ? 'password' : 'text';
+    togglePwd.querySelector('i').className = isText ? 'fas fa-eye' : 'fas fa-eye-slash';
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!username || !password) {
+      showError('Please enter both username and password.');
+      return;
+    }
+
+    loginBtn.classList.add('loading');
+    loginError.style.display = 'none';
+
+    try {
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('password', password);
+
+      const response = await fetch('../php/admin-login.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          sessionStorage.setItem('adminLoggedIn', 'true');
+          sessionStorage.setItem('adminName', data.name || 'Admin');
+          window.location.href = 'index.html';
+        } else {
+          showError(data.message || 'Invalid credentials. Please try again.');
+        }
+      } else {
+        showError('The sign-in service is unavailable. Please try again later.');
+      }
+    } catch (err) {
+      showError('The sign-in service is unavailable. Please try again later.');
+    } finally {
+      loginBtn.classList.remove('loading');
+    }
+  });
+
+  function showError(msg) {
+    document.getElementById('loginErrorMsg').textContent = msg;
+    loginError.style.display = 'flex';
+    loginError.style.alignItems = 'center';
+    loginError.style.gap = '0.5rem';
+    // Shake animation
+    loginBtn.classList.remove('animate-shake');
+    void loginBtn.offsetWidth;
+    loginBtn.classList.add('animate-shake');
+  }
+  // Mobile sidebar toggle click outside to close
+  document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    if (sidebar && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

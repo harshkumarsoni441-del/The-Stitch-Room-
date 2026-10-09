@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Portal - The Stitch Room</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background-color: #f1f5f9; display: flex; flex-direction: column; min-height: 100vh; justify-content: center; align-items: center; }
+    .login-container { width: 100%; max-width: 450px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .login-header { text-align: center; margin-bottom: 25px; }
+    .login-header img { height: 60px; margin-bottom: 10px; border-radius: 8px; }
+    .login-header h2 { color: #0f172a; margin-bottom: 5px; }
+    
+    .tabs { display: flex; border-bottom: 2px solid #e2e8f0; margin-bottom: 20px; }
+    .tab { flex: 1; text-align: center; padding: 10px; cursor: pointer; color: #64748b; font-weight: 600; transition: 0.3s; }
+    .tab.active { color: #e65100; border-bottom: 2px solid #e65100; margin-bottom: -2px; }
+    
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; color: #475569; font-weight: 500; font-size: 0.9rem; }
+    .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: 'Poppins', sans-serif; }
+    
+    .btn-login { width: 100%; padding: 12px; background: linear-gradient(135deg, #e65100, #ff9800); color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+    .btn-login:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(230, 81, 0, 0.2); }
+    
+    .login-footer { text-align: center; margin-top: 20px; font-size: 0.85rem; }
+    .error-msg { color: #ef4444; font-size: 0.85rem; text-align: center; margin-bottom: 15px; display: none; }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-header">
+    <a href="index.html"><img src="logo.jpeg" alt="The Stitch Room"></a>
+    <h2>Customer Portal</h2>
+    <p style="color:#64748b; font-size:0.85rem;">Access your school catalogue and orders.</p>
+  </div>
+  
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('login')">Login</div>
+    <div class="tab" onclick="switchTab('register')">Register</div>
+  </div>
+
+  <div class="error-msg" id="errorMsg"></div>
+
+  <!-- Login Form -->
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="loginEmail" placeholder="e.g. parent@example.com" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Enter your password" required>
+    </div>
+    <div style="display:flex; justify-content:space-between; margin-bottom: 20px; font-size:0.85rem;">
+      <label><input type="checkbox"> Remember me</label>
+      <a href="#" style="color:#e65100; text-decoration:none;">Forgot Password?</a>
+    </div>
+    <button type="submit" class="btn-login"><i class="fas fa-sign-in-alt"></i> Secure Login</button>
+  </form>
+
+  <!-- Register Form -->
+  <form id="registerForm" onsubmit="handleRegister(event)" style="display: none;">
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="regName" placeholder="e.g. Rahul Sharma" required>
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="regEmail" placeholder="parent@example.com" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="regPass" placeholder="Create a password" required>
+    </div>
+    <div class="form-group">
+      <label>School Association</label>
+      <select id="regSchool" required>
+        <option value="">Select your child's school...</option>
+        <option value="Vellore International School">Vellore International School</option>
+        <option value="Delhi Public School">Delhi Public School</option>
+        <option value="KV Katpadi">KV Katpadi</option>
+      </select>
+    </div>
+    <button type="submit" class="btn-login"><i class="fas fa-user-plus"></i> Create Account</button>
+  </form>
+
+  <div class="login-footer">
+    <a href="index.html" style="color: #64748b; text-decoration: none;"><i class="fas fa-arrow-left"></i> Back to Website</a>
+  </div>
+</div>
+
+<script>
+  if(sessionStorage.getItem('custLoggedIn') === 'true') {
+    window.location.href = 'customer-dashboard.html';
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('errorMsg').style.display = 'none';
+
+    if (tab === 'login') {
+      document.querySelectorAll('.tab')[0].classList.add('active');
+      document.getElementById('loginForm').style.display = 'block';
+    } else {
+      document.querySelectorAll('.tab')[1].classList.add('active');
+      document.getElementById('registerForm').style.display = 'block';
+    }
+  }
+
+  function showError(msg) {
+    const err = document.getElementById('errorMsg');
+    err.textContent = msg;
+    err.style.display = 'block';
+  }
+
+  // Load dynamic schools into register dropdown
+  async function loadSchools() {
+    try {
+      const r = await fetch('data/schools.json');
+      const d = await r.json();
+      if(d.schools && d.schools.length) {
+        const select = document.getElementById('regSchool');
+        select.innerHTML = '<option value="">Select your child\'s school...</option>';
+        d.schools.forEach(s => {
+          select.innerHTML += `<option value="${s.name}">${s.name}</option>`;
+        });
+      }
+    } catch(e) {}
+  }
+  loadSchools();
+
+  function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const pass = document.getElementById('loginPass').value;
+    
+    // Check local storage for registered user
+    const users = JSON.parse(localStorage.getItem('stitchCustomers') || '[]');
+    const user = users.find(u => u.email === email && u.pass === pass);
+
+    if (user || (email === 'parent@demo.com' && pass === 'demo123')) {
+      sessionStorage.setItem('custLoggedIn', 'true');
+      sessionStorage.setItem('custData', JSON.stringify(user || { name: 'Demo Parent', email: email, school: 'Vellore International School' }));
+      window.location.href = 'customer-dashboard.html';
+    } else {
+      showError('Invalid credentials. (Try registering first or use parent@demo.com / demo123)');
+    }
+  }
+
+  function handleRegister(e) {
+    e.preventDefault();
+    const name = document.getElementById('regName').value;
+    const email = document.getElementById('regEmail').value;
+    const pass = document.getElementById('regPass').value;
+    const school = document.getElementById('regSchool').value;
+
+    const users = JSON.parse(localStorage.getItem('stitchCustomers') || '[]');
+    if(users.find(u => u.email === email)) {
+      showError('Email is already registered. Please login.');
+      return;
+    }
+
+    const newUser = { name, email, pass, school };
+    users.push(newUser);
+    localStorage.setItem('stitchCustomers', JSON.stringify(users));
+
+    // Auto login
+    sessionStorage.setItem('custLoggedIn', 'true');
+    sessionStorage.setItem('custData', JSON.stringify(newUser));
+    window.location.href = 'customer-dashboard.html';
+  }
+</script>
+</body>
+</html>
+
+
+
+
+

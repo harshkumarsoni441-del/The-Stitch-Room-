@@ -1,0 +1,21 @@
+﻿{
+  "products": [
+    {
+      "id": 1,
+      "name": "Boys Standard Shirt",
+      "client": "Vellore International School",
+      "category": "School Uniform",
+      "gender": "Boys",
+      "classification": "Junior",
+      "status": "In Stock",
+      "sizes": "S, M, L, XL",
+      "colours": "White, Blue",
+      "fabric": "Poly-Viscose",
+      "image": "",
+      "config3d": "3D-SHIRT-001",
+      "specs": "Half sleeves, standard collar",
+      "desc": "Comfortable daily wear shirt for junior boys.",
+      "related": "2,3"
+    }
+  ]
+}

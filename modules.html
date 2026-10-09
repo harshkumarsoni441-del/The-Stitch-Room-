@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare two school uniform designs on matching interactive 3D student models with The Stitch Room.">
+  <title>Uniform Design Comparison | The Stitch Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/brand-refresh.css">
+  <link rel="stylesheet" href="css/compare.css">
+  <script src="assets/vendor/three.min.js"></script>
+  <link rel="stylesheet" href="css/site-polish.css">
+</head>
+<body>
+  <nav id="navbar" class="main-header">
+    <a href="index.html" class="nav-logo"><div class="logo-icon"><img src="logo.jpeg" alt="The Stitch Room Logo" class="nav-logo-img"></div><div><span class="logo-text">The Stitch Room</span><span class="logo-sub">Made for every day</span></div></a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="clients.html">Our Clients</a></li><li><a href="modules.html" class="active">Uniform Comparison</a></li><li><a href="3d-showroom.html">3D Uniform Studio</a></li><li><a href="contact.html">Contact Us</a></li></ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu"><a href="index.html"><i class="fas fa-home"></i> Home</a><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a><a href="clients.html"><i class="fas fa-school"></i> Our Clients</a><a href="modules.html" class="active"><i class="fas fa-shirt"></i> Uniform Comparison</a><a href="3d-showroom.html"><i class="fas fa-cube"></i> 3D Uniform Studio</a><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></div>
+  <main>
+    <section class="compare-hero">
+      <div class="compare-hero-bg"></div>
+      <div class="compare-hero-content">
+        <span class="compare-eyebrow"><i></i> THE STITCH ROOM · SCHOOL UNIFORMS</span>
+        <h1>Compare the uniform.<br><em>Keep the rest the same.</em></h1>
+        <p>Explore two uniform designs on matching, rotatable 3D student models. Adjust the cut and colours, then decide which look fits your school.</p>
+        <a href="#compare-designs">Start comparing <i class="fa-solid fa-arrow-down"></i></a>
+      </div>
+    </section>
+    <section class="compare-section" id="compare-designs">
+      <div class="compare-intro">
+        <div><span class="compare-kicker">A SIDE-BY-SIDE DESIGN VIEW</span><h2>Two looks. One fair comparison.</h2><p>Both models stay the same while you change the uniform details.</p></div>
+        <div class="compare-shared-controls">
+          <div><span class="control-caption">MODEL</span><div class="pill-switch" role="group" aria-label="Choose student model"><button class="active" data-model="boy" aria-pressed="true">Boy</button><button data-model="girl" aria-pressed="false">Girl</button></div></div>
+          <div><span class="control-caption">SKIN TONE</span><div class="tone-row" role="group" aria-label="Model skin tone"><button class="tone active" style="--tone:#e6bd9d" data-tone="#e6bd9d" aria-label="Light warm"></button><button class="tone" style="--tone:#bf8e6b" data-tone="#bf8e6b" aria-label="Warm medium"></button><button class="tone" style="--tone:#9a684c" data-tone="#9a684c" aria-label="Rich brown"></button><button class="tone" style="--tone:#674333" data-tone="#674333" aria-label="Deep brown"></button></div></div>
+        </div>
+      </div>
+      <div class="design-grid">
+        <article class="design-card" data-design="a">
+          <div class="design-heading"><div><span class="design-id">DESIGN A</span><input id="name-a" aria-label="Name for design A" value="Design A" maxlength="36"></div><button class="save-view" data-save="a" aria-label="Save design A image" title="Save model image"><i class="fa-solid fa-arrow-down-to-line"></i></button></div>
+          <div class="model-stage"><div class="stage-brand"><span class="stage-dot"></span> 3D UNIFORM PREVIEW</div><div class="compare-viewer" id="viewer-a" aria-label="Design A three-dimensional model"></div><div class="model-label" id="model-label-a">SCHOOL BOY</div><div class="rotate-note"><i class="fa-solid fa-rotate"></i> Drag to rotate · scroll to zoom</div></div>
+          <div class="design-controls">
+            <label class="select-label" for="outfit-a">Uniform style</label><select id="outfit-a" class="outfit-select"></select>
+            <div class="color-control"><div class="color-heading"><span>Top colour</span><span id="shirt-name-a">Classic white</span></div><div class="color-row" data-design="a" data-target="shirt"><button class="color-dot selected" style="--dot:#f7f4eb" data-colour="#f7f4eb" data-name="Classic white" aria-label="Classic white"></button><button class="color-dot" style="--dot:#d8e8e7" data-colour="#d8e8e7" data-name="Pale blue" aria-label="Pale blue"></button><button class="color-dot" style="--dot:#e5dcbf" data-colour="#e5dcbf" data-name="Sandstone" aria-label="Sandstone"></button><button class="color-dot" style="--dot:#e6c4bd" data-colour="#e6c4bd" data-name="Soft rose" aria-label="Soft rose"></button><label class="custom-dot"><i class="fa-solid fa-plus"></i><input type="color" value="#f7f4eb" aria-label="Custom top colour"></label></div></div>
+            <div class="color-control"><div class="color-heading"><span>Bottom colour</span><span id="bottom-name-a">Deep navy</span></div><div class="color-row" data-design="a" data-target="bottom"><button class="color-dot selected" style="--dot:#273a50" data-colour="#273a50" data-name="Deep navy" aria-label="Deep navy"></button><button class="color-dot" style="--dot:#535d4a" data-colour="#535d4a" data-name="Forest olive" aria-label="Forest olive"></button><button class="color-dot" style="--dot:#343536" data-colour="#343536" data-name="Charcoal" aria-label="Charcoal"></button><button class="color-dot" style="--dot:#80634c" data-colour="#80634c" data-name="Warm khaki" aria-label="Warm khaki"></button><label class="custom-dot"><i class="fa-solid fa-plus"></i><input type="color" value="#273a50" aria-label="Custom bottom colour"></label></div></div>
+            <div class="detail-row"><button class="detail-toggle" data-design="a" data-detail="tie" aria-pressed="true"><i class="fa-solid fa-grip-lines"></i> Tie</button><button class="detail-toggle" data-design="a" data-detail="blazer" aria-pressed="false"><i class="fa-solid fa-user-tie"></i> Blazer</button></div>
+          </div>
+        </article>
+        <div class="compare-divider"><span>VS</span></div>
+        <article class="design-card" data-design="b">
+          <div class="design-heading"><div><span class="design-id">DESIGN B</span><input id="name-b" aria-label="Name for design B" value="Design B" maxlength="36"></div><button class="save-view" data-save="b" aria-label="Save design B image" title="Save model image"><i class="fa-solid fa-arrow-down-to-line"></i></button></div>
+          <div class="model-stage"><div class="stage-brand"><span class="stage-dot"></span> 3D UNIFORM PREVIEW</div><div class="compare-viewer" id="viewer-b" aria-label="Design B three-dimensional model"></div><div class="model-label" id="model-label-b">SCHOOL BOY</div><div class="rotate-note"><i class="fa-solid fa-rotate"></i> Drag to rotate · scroll to zoom</div></div>
+          <div class="design-controls">
+            <label class="select-label" for="outfit-b">Uniform style</label><select id="outfit-b" class="outfit-select"></select>
+            <div class="color-control"><div class="color-heading"><span>Top colour</span><span id="shirt-name-b">Pale blue</span></div><div class="color-row" data-design="b" data-target="shirt"><button class="color-dot" style="--dot:#f7f4eb" data-colour="#f7f4eb" data-name="Classic white" aria-label="Classic white"></button><button class="color-dot selected" style="--dot:#d8e8e7" data-colour="#d8e8e7" data-name="Pale blue" aria-label="Pale blue"></button><button class="color-dot" style="--dot:#e5dcbf" data-colour="#e5dcbf" data-name="Sandstone" aria-label="Sandstone"></button><button class="color-dot" style="--dot:#e6c4bd" data-colour="#e6c4bd" data-name="Soft rose" aria-label="Soft rose"></button><label class="custom-dot"><i class="fa-solid fa-plus"></i><input type="color" value="#d8e8e7" aria-label="Custom top colour"></label></div></div>
+            <div class="color-control"><div class="color-heading"><span>Bottom colour</span><span id="bottom-name-b">Forest olive</span></div><div class="color-row" data-design="b" data-target="bottom"><button class="color-dot" style="--dot:#273a50" data-colour="#273a50" data-name="Deep navy" aria-label="Deep navy"></button><button class="color-dot selected" style="--dot:#535d4a" data-colour="#535d4a" data-name="Forest olive" aria-label="Forest olive"></button><button class="color-dot" style="--dot:#343536" data-colour="#343536" data-name="Charcoal" aria-label="Charcoal"></button><button class="color-dot" style="--dot:#80634c" data-colour="#80634c" data-name="Warm khaki" aria-label="Warm khaki"></button><label class="custom-dot"><i class="fa-solid fa-plus"></i><input type="color" value="#535d4a" aria-label="Custom bottom colour"></label></div></div>
+            <div class="detail-row"><button class="detail-toggle" data-design="b" data-detail="tie" aria-pressed="false"><i class="fa-solid fa-grip-lines"></i> Tie</button><button class="detail-toggle" data-design="b" data-detail="blazer" aria-pressed="true"><i class="fa-solid fa-user-tie"></i> Blazer</button></div>
+          </div>
+        </article>
+      </div>
+      <p class="compare-footnote"><i class="fa-solid fa-circle-info"></i> Uniform options vary by school. Treat this as a design preview and confirm each school’s approved style with our team.</p>
+    </section>
+    <section class="compare-cta"><span class="compare-kicker">READY TO REFINE YOUR DESIGN?</span><h2>Let’s make a uniform<br>your students are proud to wear.</h2><a href="contact.html">Talk to our team <i class="fa-solid fa-arrow-right"></i></a></section>
+  </main>
+  <footer class="footer"><div class="container"><div class="footer-bottom"><span>© 2026 The Stitch Room. All rights reserved.</span><span>Made with care in Tamil Nadu.</span></div></div></footer>
+  <button id="scrollTop" title="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/main.js"></script>
+  <script src="js/dress-compare.js"></script>
+</body>
+</html>

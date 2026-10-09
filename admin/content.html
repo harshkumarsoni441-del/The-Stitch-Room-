@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Content - Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <a href="index.html" class="admin-sidebar-logo">
+        <div class="logo-icon"><img src="../logo.jpeg" alt="Logo" class="nav-logo-img"></div>
+        <div><span class="logo-text">Stitch Room</span><span class="logo-sub">Admin Panel</span></div>
+      </a>
+      <button class="mobile-close-btn" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('adminSidebar').classList.remove('open');" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="admin-nav">
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Central Control</span>
+        <a href="index.html" class="admin-nav-item"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="schools.html" class="admin-nav-item"><i class="fas fa-school"></i> School Management</a>
+        <a href="products.html" class="admin-nav-item"><i class="fas fa-tshirt"></i> Product Catalogue</a>
+        <a href="3d-management.html" class="admin-nav-item"><i class="fas fa-cube"></i> 3D & Uniform Config</a>
+        <a href="content.html" class="admin-nav-item"><i class="fas fa-desktop"></i> Website Content</a><a href="customer-portal.html" class="admin-nav-item"><i class="fas fa-users"></i> Customer Portal Preview</a>
+        <a href="contacts.html" class="admin-nav-item"><i class="fas fa-envelope"></i> Contacts / Enquiries</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button id="sidebarToggle" class="btn-icon" onclick="document.getElementById('adminSidebar').classList.toggle('open')">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="admin-topbar-title">Website Content Management</div>
+      </div>
+      <div class="admin-topbar-right">
+        <div class="admin-user">
+          <div class="admin-user-avatar" id="userAvatar">A</div>
+          <span class="admin-user-name" id="adminNameDisplay">Admin</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-content" style="display:grid;grid-template-columns:250px 1fr;gap:20px;">
+      
+      <!-- Content Sidebar Menu -->
+      <div style="background:white;padding:20px;border-radius:6px;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.02);align-self:start;">
+        <h3 style="font-size:1rem;color:#0f172a;margin-bottom:15px;border-bottom:1px solid #e2e8f0;padding-bottom:10px;">Page Sections</h3>
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li style="margin-bottom:5px;"><button class="btn btn-outline" style="width:100%;text-align:left;border:none;background:#f8fafc;color:#6c63ff;" onclick="showTab('home')"><i class="fas fa-home"></i> Homepage</button></li>
+          <li style="margin-bottom:5px;"><button class="btn btn-outline" style="width:100%;text-align:left;border:none;" onclick="showTab('about')"><i class="fas fa-info-circle"></i> About Section</button></li>
+          <li style="margin-bottom:5px;"><button class="btn btn-outline" style="width:100%;text-align:left;border:none;" onclick="showTab('collections')"><i class="fas fa-tshirt"></i> Collections</button></li>
+          <li style="margin-bottom:5px;"><button class="btn btn-outline" style="width:100%;text-align:left;border:none;" onclick="showTab('services')"><i class="fas fa-concierge-bell"></i> Services</button></li>
+          <li style="margin-bottom:5px;"><button class="btn btn-outline" style="width:100%;text-align:left;border:none;" onclick="showTab('faqs')"><i class="fas fa-question-circle"></i> FAQs</button></li>
+          <li style="margin-bottom:5px;"><button class="btn btn-outline" style="width:100%;text-align:left;border:none;" onclick="showTab('testimonials')"><i class="fas fa-star"></i> Testimonials</button></li>
+          <li style="margin-bottom:5px;"><button class="btn btn-outline" style="width:100%;text-align:left;border:none;" onclick="showTab('contact')"><i class="fas fa-address-book"></i> Contact Details</button></li>
+          <li style="margin-bottom:5px;"><button class="btn btn-outline" style="width:100%;text-align:left;border:none;" onclick="showTab('seo')"><i class="fas fa-search"></i> SEO Fields</button></li>
+        </ul>
+      </div>
+
+      <!-- Editor Area -->
+      <div style="background:white;padding:25px;border-radius:6px;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.02);">
+        <div id="content-home" class="c-tab" style="display:block;">
+          <h2 style="margin-top:0;font-size:1.3rem;color:#0f172a;"><i class="fas fa-home"></i> Homepage Content</h2>
+          <div class="form-group">
+            <label class="form-label">Hero Banner Text (Headline)</label>
+            <input type="text" class="form-input" value="The Stitch Room – Shaping The Future">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hero Banner Subtext</label>
+            <textarea class="form-input" rows="3">Premium school uniforms, corporate wear, and custom 3D integrations.</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hero Background Image URL</label>
+            <input type="text" class="form-input" value="assets/bg-hero.jpg">
+          </div>
+        </div>
+
+        <div id="content-about" class="c-tab" >
+          <h2 style="margin-top:0;font-size:1.3rem;color:#0f172a;"><i class="fas fa-info-circle"></i> About Section</h2>
+          <div class="form-group"><label class="form-label">Company Story</label><textarea class="form-input" rows="5">Founded with a vision to redefine textile manufacturing...</textarea></div>
+          <div class="form-group"><label class="form-label">Mission Statement</label><input type="text" class="form-input" value="To provide premium quality uniforms globally."></div>
+          <div class="form-group"><label class="form-label">About Us Image (Media)</label><input type="text" class="form-input" value="legacy.png"></div>
+        </div>
+
+        <div id="content-seo" class="c-tab" >
+          <h2 style="margin-top:0;font-size:1.3rem;color:#0f172a;"><i class="fas fa-search"></i> SEO Fields & Meta</h2>
+          <div class="form-group"><label class="form-label">Global Meta Title</label><input type="text" class="form-input" value="The Stitch Room | Premium Uniforms & 3D Configurator"></div>
+          <div class="form-group"><label class="form-label">Meta Description</label><textarea class="form-input" rows="2">Leading provider of school, corporate and hospital uniforms.</textarea></div>
+          <div class="form-group"><label class="form-label">Focus Keywords</label><input type="text" class="form-input" value="school uniform, corporate clothing, hospital scrubs"></div>
+        </div>
+        
+        <!-- Generic Placeholder for other tabs -->
+        <div id="content-collections" class="c-tab" ><h2 style="margin-top:0;font-size:1.3rem;"><i class="fas fa-tshirt"></i> Collections</h2><p>Manage categories displayed on the collections page.</p></div>
+        <div id="content-services" class="c-tab" ><h2 style="margin-top:0;font-size:1.3rem;"><i class="fas fa-concierge-bell"></i> Services</h2><p>Manage service cards.</p></div>
+        <div id="content-faqs" class="c-tab" ><h2 style="margin-top:0;font-size:1.3rem;"><i class="fas fa-question-circle"></i> FAQs</h2><p>Add/Edit FAQ questions and answers.</p></div>
+        <div id="content-testimonials" class="c-tab" ><h2 style="margin-top:0;font-size:1.3rem;"><i class="fas fa-star"></i> Testimonials</h2><p>Manage user reviews and testimonials.</p></div>
+        
+        <div id="content-contact" class="c-tab" >
+          <h2 style="margin-top:0;font-size:1.3rem;color:#0f172a;"><i class="fas fa-address-book"></i> Contact Details</h2>
+          <div class="form-group"><label class="form-label">Phone Number</label><input type="text" class="form-input" value="+91 78128 79053"></div>
+          <div class="form-group"><label class="form-label">Email Address</label><input type="text" class="form-input" value="thestitchroom95@gmail.com"></div>
+          <div class="form-group"><label class="form-label">Physical Address</label><textarea class="form-input" rows="2">No.21, 4a East Cross Road, Gandhinagar East, Katpadi, Vellore - 632006</textarea></div>
+        </div>
+
+        <div style="margin-top:20px;text-align:right;">
+          <button class="btn btn-primary" onclick="alert('Content saved successfully!')"><i class="fas fa-save"></i> Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  if (sessionStorage.getItem('adminLoggedIn') !== 'true') window.location.href = 'login.html';
+  function showTab(id) {
+    document.querySelectorAll('.c-tab').forEach(t => t.style.display = 'none');
+    document.getElementById('content-' + id).style.display = 'block';
+    const btns = document.querySelectorAll('.btn-outline');
+    btns.forEach(b => { b.style.background = 'transparent'; b.style.color = 'inherit'; });
+    event.currentTarget.style.background = '#f8fafc';
+    event.currentTarget.style.color = '#6c63ff';
+  }
+  // Mobile sidebar toggle click outside to close
+  document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    if (sidebar && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About The Stitch Room - Learn about our mission, what we provide, and why schools and individuals across Tamil Nadu choose us for high-quality uniforms and apparel.">
+  <title>About Us - The Stitch Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* -------------------------------------------
+       ABOUT PAGE � MOBILE RESPONSIVE
+       ------------------------------------------- */
+
+    /* -- 992px Tablet landscape -- */
+    @media (max-width: 992px) {
+      .mission-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+      .mission-visual { order: -1; }
+
+      .mission-features {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.875rem !important;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+      .why-grid > div:first-child { text-align: center; }
+      .why-grid > div:first-child .section-title { text-align: center !important; }
+      .why-grid > div:first-child a.btn { display: inline-flex; }
+
+      .provide-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.25rem !important;
+      }
+
+      .stats .container {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    /* -- 768px Tablet portrait -- */
+    @media (max-width: 768px) {
+      .mission-features {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+      }
+      .mission-feature { padding: 0.875rem !important; }
+
+      .mission-text h2 { font-size: 1.6rem !important; }
+      .mission-text p  { font-size: 0.9rem; }
+
+      .provide-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+      .provide-card { padding: 1.5rem !important; }
+      .provide-card h3 { font-size: 0.95rem; }
+      .provide-card p  { font-size: 0.82rem; }
+
+      .why-list { gap: 0.75rem !important; }
+      .why-item { padding: 1rem !important; }
+      .why-item h4 { font-size: 0.88rem; }
+      .why-item p  { font-size: 0.78rem; }
+
+      .mission-visual-card { padding: 1.5rem !important; }
+      .mission-icon-large  { font-size: 3.5rem !important; }
+
+      .about-cta-btns {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+      }
+      .about-cta-btns .btn {
+        width: 100% !important;
+        max-width: 300px !important;
+        justify-content: center !important;
+      }
+
+      .stats .container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+      }
+
+      .mission-section.section,
+      .provide-section.section,
+      .why-section.section { padding: 3rem 0 !important; }
+    }
+
+    /* -- 576px Mobile portrait -- */
+    @media (max-width: 576px) {
+      .mission-text h2 { font-size: 1.4rem !important; }
+
+      .provide-grid { grid-template-columns: 1fr !important; }
+      .provide-card { padding: 1.25rem !important; border-radius: 14px !important; }
+      .provide-card-icon { width: 50px !important; height: 50px !important; font-size: 1.1rem !important; margin-bottom: 0.75rem !important; }
+      .provide-card h3 { font-size: 0.9rem !important; }
+      .provide-card p  { font-size: 0.8rem !important; }
+
+      .mission-feature-icon { width: 36px !important; height: 36px !important; min-width: 36px !important; font-size: 0.88rem !important; }
+      .mission-feature-text h4 { font-size: 0.83rem !important; }
+      .mission-feature-text p  { font-size: 0.74rem !important; }
+
+      .why-check { width: 24px !important; height: 24px !important; min-width: 24px !important; font-size: 0.68rem !important; }
+      .why-item h4 { font-size: 0.85rem !important; }
+      .why-item p  { font-size: 0.76rem !important; }
+
+      .about-cta-btns {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.625rem !important;
+      }
+      .about-cta-btns .btn { width: 100% !important; max-width: 100% !important; justify-content: center !important; }
+
+      .stats .container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.875rem !important;
+      }
+      .stat-card  { padding: 1.25rem 1rem !important; }
+      .stat-number{ font-size: 1.75rem !important; }
+
+      .glass-card { padding: 2rem 1.25rem !important; }
+      .glass-card h2 { font-size: 1.4rem !important; }
+      .glass-card p  { font-size: 0.85rem; }
+
+      .mission-section.section,
+      .provide-section.section,
+      .why-section.section { padding: 2.5rem 0 !important; }
+    }
+
+    /* -- 380px Small mobile -- */
+    @media (max-width: 380px) {
+      .mission-text h2   { font-size: 1.25rem !important; }
+      .mission-icon-large{ font-size: 2.8rem !important; }
+      .provide-card h3   { font-size: 0.85rem !important; }
+      .provide-card      { padding: 1rem !important; }
+      .why-item          { flex-direction: column; gap: 0.5rem; }
+      .glass-card        { padding: 1.75rem 1rem !important; }
+      .glass-card h2     { font-size: 1.15rem !important; }
+      .stat-card         { padding: 1rem 0.75rem !important; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/site-polish.css">
+</head>
+<body>
+
+
+
+<!-- NAVBAR -->
+<nav id="navbar" class="main-header">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon"><img src="logo.jpeg" alt="The Stitch Room Logo" class="nav-logo-img"></div>
+    <div>
+      <span class="logo-text">The Stitch Room</span>
+      <span class="logo-sub">Made for every day</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About Us</a></li>
+    <li><a href="clients.html">Our Clients</a></li>
+    <li><a href="modules.html">Uniform Comparison</a></li>
+    <li><a href="3d-showroom.html">3D Uniform Studio</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="fas fa-home"></i> Home</a>
+  <a href="about.html" class="active"><i class="fas fa-info-circle"></i> About Us</a>
+  <a href="clients.html"><i class="fas fa-school"></i> Our Clients</a>
+  <a href="modules.html"><i class="fas fa-shirt"></i> Uniform Comparison</a>
+  <a href="3d-showroom.html"><i class="fas fa-cube"></i> 3D Uniform Studio</a>
+  <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+</div>
+
+<main>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="hero-orb hero-orb-1" style="opacity:0.2;"></div>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+      <span>About Us</span>
+    </div>
+    <div class="hero-badge"><i class="fas fa-info-circle"></i> Our Story</div>
+    <h1 class="page-hero-title">About <span class="text-gradient">The Stitch Room</span></h1>
+    <p class="page-hero-sub">Providing premium textile solutions, school uniforms, and custom clothing across Tamil Nadu since our founding in Vellore.</p>
+  </div>
+</section>
+
+<!-- COMPANY STORY -->
+<section class="section" style="padding: 80px 0; background: #fff;">
+  <div class="container" style="display: flex; gap: 40px; align-items: center; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 300px;" data-reveal="fade-right">
+      <span class="section-tag">Our Story</span>
+      <h2 class="section-title" style="text-align: left;">A Legacy of <span class="gradient-text">Craftsmanship</span></h2>
+      <p style="color: #475569; line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px;">
+        The Stitch Room began with a simple idea: to bring high-quality, perfectly fitting garments to schools and institutions across Tamil Nadu. Over the years, we have grown from a small tailoring unit into a state-of-the-art textile manufacturing hub in Vellore.
+      </p>
+      <p style="color: #475569; line-height: 1.8; font-size: 1.05rem;">
+        Our journey is defined by our commitment to quality, precision, and customer satisfaction. By bridging traditional tailoring techniques with modern manufacturing technology, we ensure every piece of clothing we produce meets the highest standards of durability and comfort.
+      </p>
+    </div>
+    <div style="flex: 1; min-width: 300px; position: relative; display: flex; justify-content: center; align-items: center;" data-reveal="fade-left">
+      <img src="legacy.png" alt="The Stitch Room - Premium Uniforms and Apparel" style="max-width: 100%; width: auto; height: auto; display: block; margin: 40px auto 0 auto; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+      </div>
+  </div>
+</section>
+<!-- MISSION -->
+<section class="mission-section section">
+  <div class="container">
+    <div class="mission-grid">
+
+      <div class="mission-text" data-reveal="fade-right">
+        <span class="section-tag">Mission & Vision</span>
+        <h2 style="font-size: 2.2rem; font-weight: 800; margin-top: 10px; margin-bottom: 20px;">Driving Excellence in <span class="gradient-text">Apparel</span></h2>
+        <p style="color: #475569; margin-bottom: 15px; line-height: 1.7;"><strong>Our Mission:</strong> To provide top-tier school uniforms and custom clothing across Tamil Nadu through premium fabrics and perfect fits, making quality accessible to all.</p>
+        <p style="color: #475569; margin-bottom: 25px; line-height: 1.7;"><strong>Our Vision:</strong> To become the most trusted and innovative institutional clothing partner in India, known for sustainable practices, technological integration, and unparalleled craftsmanship.</p>
+        <div class="mission-features">
+          <div class="mission-feature">
+            <div class="mission-feature-icon"><i class="fas fa-cube"></i></div>
+            <div class="mission-feature-text"><h4>Premium Fabrics</h4><p>High-quality, durable materials</p></div>
+          </div>
+          <div class="mission-feature">
+            <div class="mission-feature-icon"><i class="fas fa-map"></i></div>
+            <div class="mission-feature-text"><h4>Tamil Nadu Focus</h4><p>Uniforms tailored for local schools</p></div>
+          </div>
+          <div class="mission-feature">
+            <div class="mission-feature-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div class="mission-feature-text"><h4>Perfect Fit</h4><p>Custom tailoring for all body types</p></div>
+          </div>
+          <div class="mission-feature">
+            <div class="mission-feature-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="mission-feature-text"><h4>Affordable Prices</h4><p>Quality stitching within budget</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mission-visual" data-reveal="fade-left">
+        <div class="mission-visual-card">
+          <div class="mission-icon-large"><img src="logo.jpeg" alt="The Stitch Room sewing machine logo"></div>
+          <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:0.5rem;position:relative;z-index:1;">The Stitch Room</h3>
+          <p style="color:rgba(0,0,0,0.6);font-size:0.875rem;position:relative;z-index:1;">Premium Textile Business</p>
+          <div style="display:flex;justify-content:center;gap:2rem;margin-top:2rem;position:relative;z-index:1;">
+            <div style="text-align:center;">
+              <div style="font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#c97550,#df9a70);-webkit-background-clip:text;-webkit-text-fill-color:transparent;" data-counter data-target="12" data-suffix="+">12+</div>
+              <div style="font-size:0.75rem;color:rgba(0,0,0,0.5);">Schools</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#c97550,#df9a70);-webkit-background-clip:text;-webkit-text-fill-color:transparent;" data-counter data-target="4">4</div>
+              <div style="font-size:0.75rem;color:rgba(0,0,0,0.5);">Products</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#c97550,#df9a70);-webkit-background-clip:text;-webkit-text-fill-color:transparent;" data-counter data-target="8000" data-suffix="+">8K+</div>
+              <div style="font-size:0.75rem;color:rgba(0,0,0,0.5);">Students</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE PROVIDE -->
+<section class="provide-section section" style="background:linear-gradient(180deg,transparent,rgba(32,50,75,0.035),transparent);">
+  <div class="container">
+    <div class="section-header" data-reveal="fade-up">
+      <span class="section-tag">Services</span>
+      <h2 class="section-title">What We <span class="gradient-text">Provide</span></h2>
+      <p class="section-desc">Our core offerings that help schools and individuals get the best apparel.</p>
+    </div>
+    <div class="provide-grid" data-stagger>
+      <div class="provide-card">
+        <span class="provide-card-number">01</span>
+        <div class="provide-card-icon"><i class="fas fa-cube"></i></div>
+        <h3>School Uniforms</h3>
+        <p>Complete uniform solutions for partner schools, stitched to perfection for students of all ages.</p>
+      </div>
+      <div class="provide-card">
+        <span class="provide-card-number">02</span>
+        <div class="provide-card-icon"><i class="fas fa-map-marked-alt"></i></div>
+        <h3>Custom Tailoring</h3>
+        <p>Bespoke tailoring services for casual wear, ethnic wear, and formal clothing.</p>
+      </div>
+      <div class="provide-card">
+        <span class="provide-card-number">03</span>
+        <div class="provide-card-icon"><i class="fas fa-chart-bar"></i></div>
+        <h3>Bulk Orders</h3>
+        <p>Specialized in fulfilling bulk orders for institutions, businesses, and special events.</p>
+      </div>
+      <div class="provide-card">
+        <span class="provide-card-number">04</span>
+        <div class="provide-card-icon"><i class="fas fa-venus-mars"></i></div>
+        <h3>Ready-Made Garments</h3>
+        <p>High-quality, trendy, and comfortable ready-made garments for all age groups and occasions, crafted with premium materials.</p>
+      </div>
+      <div class="provide-card">
+        <span class="provide-card-number">05</span>
+        <div class="provide-card-icon"><i class="fas fa-cogs"></i></div>
+        <h3>Alteration Services</h3>
+        <p>Expert alteration services to ensure your clothes fit you perfectly every time.</p>
+      </div>
+      <div class="provide-card">
+        <span class="provide-card-number">06</span>
+        <div class="provide-card-icon"><i class="fas fa-mobile-alt"></i></div>
+        <h3>Quality Assurance</h3>
+        <p>Platform works seamlessly on all devices � desktop, tablet, and mobile � ensuring students can access Products from anywhere.</p>
+      </div>
+          <div class="provide-card">
+        <span class="provide-card-number">07</span>
+        <div class="provide-card-icon"><i class="fas fa-briefcase"></i></div>
+        <h3>Corporate & Institutional Clothing</h3>
+        <p>Professional uniforms for corporates, hospitals, hotels, and organizations designed for comfort and brand identity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-section section">
+  <div class="container">
+    <div class="why-grid">
+      <div data-reveal="fade-right">
+        <span class="section-tag">Why Us</span>
+        <h2 class="section-title" style="text-align:left;">Why Customers <span class="gradient-text">Choose Us</span></h2>
+        <p style="color:rgba(0,0,0,0.6);margin-bottom:1rem;line-height:1.7;">We combine high-quality fabrics with expert stitching to deliver clothing that looks great and lasts long.</p>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:1rem;"><i class="fas fa-handshake"></i> Partner With Us</a>
+      </div>
+      <div class="why-list" data-stagger>
+        <div class="why-item">
+          <div class="why-check"><i class="fas fa-check"></i></div>
+          <div><h4>Fast Delivery</h4><p>We ensure timely delivery of all orders, whether individual or bulk.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-check"><i class="fas fa-check"></i></div>
+          <div><h4>Tamil Nadu Focused</h4><p>Designed specifically for Tamil Nadu schools with local context, regional map coverage, and curriculum alignment.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-check"><i class="fas fa-check"></i></div>
+          <div><h4>Expert Tailors</h4><p>Our highly skilled artisans and master tailors bring decades of experience, ensuring every garment is constructed with absolute precision.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-check"><i class="fas fa-check"></i></div>
+          <div><h4>Premium Fabrics</h4><p>We source only the best fabrics to ensure comfort, breathability, and durability.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-check"><i class="fas fa-check"></i></div>
+          <div><h4>Dedicated Support</h4><p>Direct support from the Vellore-based team. Reach us at thestitchroom95@gmail.com or call anytime.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-check"><i class="fas fa-check"></i></div>
+          <div><h4>Latest Trends</h4><p>We continuously upgrade our designs and manufacturing techniques to bring modern, stylish, and comfortable fits to our diverse clientele.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" style="padding:4rem 0;">
+  <div class="container" data-stagger>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-school"></i></div>
+      <div class="stat-number" data-counter data-target="12" data-suffix="+">12+</div>
+      <div class="stat-label">Partner Schools</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-map-marker-alt"></i></div>
+      <div class="stat-number" data-counter data-target="10">10</div>
+      <div class="stat-label">Cities Covered</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-users"></i></div>
+      <div class="stat-number" data-counter data-target="8000" data-suffix="+">8000+</div>
+      <div class="stat-label">Students Served</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-star"></i></div>
+      <div class="stat-number" data-counter data-target="100" data-suffix="%">100%</div>
+      <div class="stat-label">Satisfaction Rate</div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FAQ SECTION IN ABOUT US -->
+<section class="section" style="background: #f1f5f9; padding: 60px 0;">
+  <div class="container" style="text-align: center; margin-bottom: 20px;" data-reveal="fade-up">
+    <h2 style="font-size: 2.5rem; font-weight: 800; color: #0f172a;">Frequently Asked <span class="gradient-text">Questions</span></h2>
+    <p style="color: #64748b; font-size: 1.1rem; max-width: 600px; margin: 40px auto 0 auto;">Find answers regarding school partnerships, ordering processes, corporate requirements, and uniform customizations.</p>
+  </div>
+  
+<div class="faq-layout">
+  <!-- Categories Sidebar -->
+  <aside class="faq-sidebar revealed" data-reveal="fade-right">
+    <h3 style="margin-top:0; color:#0f172a; margin-bottom:15px; font-size:1.2rem;">Topics</h3>
+    <button class="faq-cat-btn active" onclick="switchFAQ('partnerships', this)"><i class="fas fa-handshake" style="width:25px;"></i> School Partnerships</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('uniforms', this)"><i class="fas fa-tshirt" style="width:25px;"></i> Uniform &amp; Customization</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('parents', this)"><i class="fas fa-users" style="width:25px;"></i> Parent/Customer Guidance</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('ordering', this)"><i class="fas fa-shopping-cart" style="width:25px;"></i> Ordering &amp; Bulk Info</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('corporate', this)"><i class="fas fa-briefcase" style="width:25px;"></i> Corporate &amp; Hospital</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('onboarding', this)"><i class="fas fa-network-wired" style="width:25px;"></i> Network Onboarding</button>
+  </aside>
+
+  <!-- FAQ Content Area -->
+  <div class="faq-content revealed" id="faq-content-container" data-reveal="fade-up"><div class="faq-group active" id="faq-partnerships"><h2>School Partnerships</h2>
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">How can our school partner with The Stitch Room? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">Schools can submit a partnership enquiry via our Contact page. Our team will schedule a consultation to discuss your uniform requirements, design needs, and onboarding process.</p></div>
+          </div>
+        
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">What are the benefits of a school partnership? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">Partner schools receive a dedicated 3D catalogue, automated parent ordering portals, bulk discounts, and custom branding options.</p></div>
+          </div>
+        </div><div class="faq-group " id="faq-uniforms"><h2>Uniform &amp; Customization</h2>
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">Can we customize the fabric and colors? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">Yes, we offer extensive customization options including fabric choice (cotton, poly-viscose, etc.), exact pantone color matching, and custom embroidery for logos.</p></div>
+          </div>
+        
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">What sizes are available? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">We manufacture all standard sizes for Junior and Senior categories. Custom tailoring and Made-to-Order sizes are also available upon request.</p></div>
+          </div>
+        </div><div class="faq-group " id="faq-parents"><h2>Parent &amp; Customer Guidance</h2>
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">How do I order uniforms for my child? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">Parents can log into the Customer Portal, select their child's school, view the approved catalogue, and place an order directly online.</p></div>
+          </div>
+        
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">What is the return/exchange policy? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">Standard sizes can be exchanged within 7 days of delivery. Custom-fitted items are non-refundable unless there is a manufacturing defect.</p></div>
+          </div>
+        </div><div class="faq-group " id="faq-ordering"><h2>Ordering &amp; Bulk Information</h2>
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">Is there a minimum quantity for bulk orders? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">For initial bulk manufacturing, we typically require a minimum of 100 pieces per design. However, reorders through the parent portal have no minimum limits.</p></div>
+          </div>
+        
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">What are the payment options for bulk orders? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">Bulk orders require a 50% advance payment via Bank Transfer, NEFT, or corporate cheque. The balance is due upon dispatch.</p></div>
+          </div>
+        </div><div class="faq-group " id="faq-corporate"><h2>Corporate &amp; Hospital Requirements</h2>
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">Do you supply hospital scrubs and lab coats? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">Yes, we manufacture medical-grade scrubs, lab coats, and patient gowns with fluid-resistant and anti-microbial fabric options.</p></div>
+          </div>
+        
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">Can we get custom uniforms for our corporate staff? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">Absolutely. We design and supply premium executive wear, daily staff uniforms, and security attire for organizations of all sizes.</p></div>
+          </div>
+        </div><div class="faq-group " id="faq-onboarding"><h2>School-Network Onboarding</h2>
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">How long does it take to onboard a new school? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">From design approval to setting up your 3D showroom and parent portal, the onboarding process takes approximately 2-3 weeks.</p></div>
+          </div>
+        
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">Do you provide sample uniforms before finalizing? <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">Yes, once the digital 3D designs are approved, we create physical samples for the management's final approval before starting bulk production.</p></div>
+          </div>
+        </div></div>
+</div>
+</section>
+<!-- DEDICATED CTA -->
+<section class="section" style="background: linear-gradient(145deg, #080810 0%, #151525 100%); padding: 100px 0; color: white; text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(108,99,255,0.1);">
+  <div style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(108,99,255,0.08), transparent 70%); top: -200px; left: -150px; border-radius: 50%; filter: blur(40px); pointer-events: none;"></div>
+  <div style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(230,81,0,0.06), transparent 70%); bottom: -150px; right: -100px; border-radius: 50%; filter: blur(40px); pointer-events: none;"></div>
+  <div class="container" data-reveal="zoom" style="position: relative; z-index: 2;">
+    <span style="background: rgba(230, 81, 0, 0.15); color: #ff9800; padding: 6px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid rgba(230, 81, 0, 0.3); display: inline-block; margin-bottom: 25px;">Get Started Today</span>
+    <h2 style="font-size: 3rem; font-weight: 800; margin: 0 0 25px; color: #ffffff; text-shadow: 0 4px 15px rgba(0,0,0,0.5); line-height: 1.2;">
+      Partner with <span style="background: linear-gradient(135deg, #c97550, #df9a70); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">The Stitch Room</span>
+    </h2>
+    <p style="font-size: 1.15rem; color: #cbd5e1; max-width: 750px; margin: 0 auto 40px; line-height: 1.7; font-weight: 300;">
+      Whether you are a <strong style="color:white; font-weight:600;">School</strong> looking for a reliable uniform supplier, an <strong style="color:white; font-weight:600;">Organization</strong> needing professional corporate wear, or a <strong style="color:white; font-weight:600;">Customer</strong> seeking premium custom tailoring — we are here to serve you.
+    </p>
+    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+      <a href="contact.html?type=school" class="btn" style="background: #c97550; color: white; padding: 16px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; box-shadow: 0 10px 25px rgba(230, 81, 0, 0.3); transition: transform 0.3s;"><i class="fas fa-school" style="margin-right: 8px;"></i> Schools Enquiry</a>
+      <a href="contact.html?type=organization" class="btn" style="background: white; color: #0f172a; padding: 16px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 0.3s;"><i class="fas fa-building" style="margin-right: 8px;"></i> Corporate Enquiry</a>
+      <a href="contact.html?type=customer" class="btn" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 16px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; backdrop-filter: blur(5px); transition: background 0.3s;"><i class="fas fa-user" style="margin-right: 8px;"></i> Individual Needs</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-icon"><img src="logo.jpeg" alt="The Stitch Room Logo" class="footer-logo-img"></div>
+          <span class="footer-logo-text">The Stitch Room</span>
+        </div>
+        <p>Providing the best school uniforms and custom clothing across Tamil Nadu through premium fabrics and perfect fits.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="clients.html">Our Clients</a>
+          <a href="modules.html">Uniform Comparison</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <div class="footer-links">
+          <a href="modules.html#compare-designs">Uniform Comparison</a>
+          <a href="3d-showroom.html">3D Uniform Studio</a>
+          <a href="contact.html">Bulk School Orders</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>No.21, 4a East Cross Road, Gandhinagar East, Katpadi, Vellore - 632006</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <a href="tel:+917812879053">+91 78128 79053</a><br>
+              <a href="tel:+919360722463">+91 93607 22463</a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:thestitchroom95@gmail.com">thestitchroom95@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 The Stitch Room. All rights reserved.</span>
+      <span>Made with <span style="color:#e74c3c;">?</span> in Vellore, Tamil Nadu</span>
+    </div>
+  </div>
+</footer>
+
+<button id="scrollTop" title="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+<script src="js/main.js"></script>
+
+<!-- FLOATING CONTACT WIDGET -->
+<div class="floating-contact">
+  <a href="mailto:thestitchroom95@gmail.com" class="float-btn float-email">
+    <i class="fas fa-envelope"></i>
+    <span class="float-tooltip">Email Us</span>
+  </a>
+  <a href="tel:+917812879053" class="float-btn float-phone">
+    <i class="fas fa-phone-alt"></i>
+    <span class="float-tooltip">Call Us</span>
+  </a>
+  <a href="https://wa.me/917812879053" target="_blank" class="float-btn float-wa">
+    <i class="fab fa-whatsapp"></i>
+    <span class="float-tooltip">WhatsApp</span>
+  </a>
+</div>
+<script>
+  function switchFAQ(id, btn) {
+    document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.faq-group').forEach(g => g.classList.remove('active'));
+    document.getElementById(`faq-${id}`).classList.add('active');
+  }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

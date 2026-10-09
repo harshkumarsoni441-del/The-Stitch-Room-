@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Our Clients - Partner schools of The Stitch Room across Tamil Nadu. View school locations on interactive map.">
+  <title>Our Clients - The Stitch Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/site-polish.css">
+</head>
+<body>
+
+
+
+<!-- NAVBAR -->
+<nav id="navbar" class="main-header">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon"><img src="logo.jpeg" alt="The Stitch Room Logo" class="nav-logo-img"></div>
+    <div>
+      <span class="logo-text">The Stitch Room</span>
+      <span class="logo-sub">Made for every day</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="clients.html" class="active">Our Clients</a></li>
+    <li><a href="modules.html">Uniform Comparison</a></li>
+    <li><a href="3d-showroom.html">3D Uniform Studio</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="fas fa-home"></i> Home</a>
+  <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+  <a href="clients.html" class="active"><i class="fas fa-school"></i> Our Clients</a>
+  <a href="modules.html"><i class="fas fa-shirt"></i> Uniform Comparison</a>
+  <a href="3d-showroom.html"><i class="fas fa-cube"></i> 3D Uniform Studio</a>
+  <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+</div>
+
+<main>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="hero-orb hero-orb-1" style="opacity:0.2;"></div>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+      <span>Our Clients</span>
+    </div>
+    <div class="hero-badge"><i class="fas fa-school"></i> Partner Schools</div>
+    <h1 class="page-hero-title">Our <span class="text-gradient">Partner Schools</span></h1>
+    <p class="page-hero-sub">
+      Explore our growing network of schools across Tamil Nadu. Click "View Map" on any school to see its location on the interactive map below.
+    </p>
+  </div>
+</section>
+
+<!-- SCHOOLS SECTION -->
+<section class="section">
+  <div class="container">
+
+    <!-- Filter Tabs -->
+    <div id="filter-container" class="filter-tabs" data-reveal="fade-up">
+      <button class="filter-tab active" data-filter="All">All Schools</button>
+      <button class="filter-tab" data-filter="Chennai">Chennai</button>
+      <button class="filter-tab" data-filter="Coimbatore">Coimbatore</button>
+      <button class="filter-tab" data-filter="Madurai">Madurai</button>
+      <button class="filter-tab" data-filter="Salem">Salem</button>
+      <button class="filter-tab" data-filter="Trichy">Trichy</button>
+      <button class="filter-tab" data-filter="Other">Other Cities</button>
+    </div>
+
+    <!-- Count -->
+    <p class="schools-count" data-reveal="fade-up">
+      Showing <span id="schools-count">0</span> schools
+    </p>
+
+    <!-- Schools Grid -->
+    <div class="schools-grid" id="schools-grid">
+      <!-- Dynamically populated by schools.js -->
+      <div style="grid-column:1/-1;padding:3rem;text-align:center;">
+        <div class="canvas-loading">
+          <div class="canvas-loading-spinner"></div>
+          <span>Loading schools...</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<!-- PARTNERSHIP CTA -->
+<section class="section" style="background: linear-gradient(145deg, #080810 0%, #151525 100%); padding: 100px 0; color: white; text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(108,99,255,0.1);">
+  <!-- Premium background glow elements -->
+  <div style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(108,99,255,0.08), transparent 70%); top: -200px; right: -150px; border-radius: 50%; filter: blur(40px); pointer-events: none;"></div>
+  <div style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(230,81,0,0.06), transparent 70%); bottom: -150px; left: -100px; border-radius: 50%; filter: blur(40px); pointer-events: none;"></div>
+  
+  <div class="container" data-reveal="zoom" style="position: relative; z-index: 2;">
+    <span style="background: rgba(230, 81, 0, 0.15); color: #ff9800; padding: 6px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid rgba(230, 81, 0, 0.3); display: inline-block; margin-bottom: 25px;">Join Our Network</span>
+    
+    <h2 style="font-size: 3rem; font-weight: 800; margin: 0 0 25px; color: #ffffff; text-shadow: 0 4px 15px rgba(0,0,0,0.5); line-height: 1.2;">
+      Add Your School to <span style="background: linear-gradient(135deg, #c97550, #df9a70); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">The Stitch Room</span>
+    </h2>
+    
+    <p style="font-size: 1.15rem; color: #cbd5e1; max-width: 750px; margin: 0 auto 40px; line-height: 1.7; font-weight: 300;">
+      Become a <strong style="color:white; font-weight:600;">Partner School</strong> and experience seamless uniform management. We offer dedicated support, custom designs, bulk manufacturing, and an exclusive 3D showroom for your students.
+    </p>
+    
+    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+      <a href="contact.html?type=partnership" class="btn" style="background: #c97550; color: white; padding: 16px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: transform 0.3s; box-shadow: 0 10px 25px rgba(230, 81, 0, 0.3);">
+        <i class="fas fa-handshake"></i> Partnership Enquiry
+      </a>
+      <a href="contact.html?type=demo" class="btn" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 16px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; backdrop-filter: blur(5px); transition: background 0.3s;">
+        <i class="fas fa-play-circle"></i> Request Demo
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-icon"><img src="logo.jpeg" alt="The Stitch Room Logo" class="footer-logo-img"></div>
+          <span class="footer-logo-text">The Stitch Room</span>
+        </div>
+        <p>Delivering top-quality school uniforms and custom dresses across Tamil Nadu.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="clients.html">Our Clients</a>
+          <a href="modules.html">Uniform Comparison</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>School Cities</h4>
+        <div class="footer-links">
+          <a href="#">Chennai</a>
+          <a href="#">Coimbatore</a>
+          <a href="#">Madurai</a>
+          <a href="#">Salem</a>
+          <a href="#">Tiruchirappalli</a>
+          <a href="#">Vellore & More</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>No.21, 4a East Cross Road, Gandhinagar East, Katpadi, Vellore - 632006</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone"></i>
+            <div><a href="tel:+917812879053">+91 78128 79053</a></div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:thestitchroom95@gmail.com">thestitchroom95@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 The Stitch Room. All rights reserved.</span>
+      <span>Made with <span style="color:#e74c3c;">?</span> in Vellore, Tamil Nadu</span>
+    </div>
+  </div>
+</footer>
+
+<button id="scrollTop" title="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+<script src="js/main.js"></script>
+<script src="js/schools.js"></script>
+<script src="js/map.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Map search
+  const mapSearch = document.getElementById('map-search');
+  if (mapSearch) {
+    let searchTimeout;
+    mapSearch.addEventListener('input', () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        const q = mapSearch.value.trim();
+        if (q && window.MapManager) {
+          const found = MapManager.searchSchool(q);
+          if (!found) {
+            mapSearch.style.borderColor = 'rgba(239,68,68,0.5)';
+            setTimeout(() => mapSearch.style.borderColor = '', 1500);
+          } else {
+            mapSearch.style.borderColor = 'rgba(16,185,129,0.5)';
+          }
+        }
+      }, 500);
+    });
+  }
+});
+</script>
+
+<!-- FLOATING CONTACT WIDGET -->
+<div class="floating-contact">
+  <a href="mailto:thestitchroom95@gmail.com" class="float-btn float-email">
+    <i class="fas fa-envelope"></i>
+    <span class="float-tooltip">Email Us</span>
+  </a>
+  <a href="tel:+917812879053" class="float-btn float-phone">
+    <i class="fas fa-phone-alt"></i>
+    <span class="float-tooltip">Call Us</span>
+  </a>
+  <a href="https://wa.me/917812879053" target="_blank" class="float-btn float-wa">
+    <i class="fab fa-whatsapp"></i>
+    <span class="float-tooltip">WhatsApp</span>
+  </a>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

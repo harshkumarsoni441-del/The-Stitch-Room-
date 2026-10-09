@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modules - Admin Panel | The Stitch Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <a href="index.html" class="admin-sidebar-logo">
+        <div class="logo-icon"><img src="../logo.jpeg" alt="The Stitch Room Logo" class="nav-logo-img"></div>
+        <div>
+          <span class="logo-text">The Stitch Room</span>
+          <span class="logo-sub">Admin Panel</span>
+        </div>
+      </a>
+      <button class="mobile-close-btn" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('adminSidebar').classList.remove('open');" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="admin-nav">
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Main</span>
+        <a href="index.html" class="admin-nav-item"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="schools.html" class="admin-nav-item"><i class="fas fa-school"></i> Schools</a>
+        <a href="contacts.html" class="admin-nav-item"><i class="fas fa-envelope"></i> Contacts</a>
+        <a href="modules.html" class="admin-nav-item active"><i class="fas fa-cube"></i> Modules</a>
+      </div>
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Website</span>
+        <a href="../index.html" target="_blank" class="admin-nav-item"><i class="fas fa-external-link-alt"></i> View Website</a>
+        <a href="../modules.html" target="_blank" class="admin-nav-item"><i class="fas fa-cube"></i> View 3D Modules</a>
+      </div>
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Account</span>
+        <button class="admin-nav-item" onclick="logout()" style="text-align:left;width:100%;color:rgba(239,68,68,0.8);">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button class="btn-icon" id="sidebarToggle"    onclick="document.getElementById('adminSidebar').classList.toggle('open')">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="admin-topbar-title">3D Modules Overview</div>
+      </div>
+      <div class="admin-topbar-right">
+        <a href="../modules.html" target="_blank" class="btn btn-primary btn-sm">
+          <i class="fas fa-external-link-alt"></i> View Live Modules
+        </a>
+        <div class="admin-user">
+          <div class="admin-user-avatar" id="userAvatar">A</div>
+          <span class="admin-user-name" id="adminNameDisplay">Admin</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- Stats -->
+      <div class="admin-stats-grid" style="margin-bottom:1.5rem;">
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon purple"><i class="fas fa-cube"></i></div>
+          <div>
+            <div class="admin-stat-number">4</div>
+            <div class="admin-stat-label">Total Modules</div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon green"><i class="fas fa-check-circle"></i></div>
+          <div>
+            <div class="admin-stat-number">4</div>
+            <div class="admin-stat-label">Active Modules</div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon cyan"><i class="fas fa-users"></i></div>
+          <div>
+            <div class="admin-stat-number">3–20</div>
+            <div class="admin-stat-label">Age Range (years)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modules List -->
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;">
+
+        <!-- Module 1 -->
+        <div class="admin-card" style="overflow:visible;">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">
+              <span style="font-size:1.3rem;margin-right:0.5rem;">🧒</span> Module 1: Age Journey
+            </h3>
+            <span class="status-badge status-read">Active</span>
+          </div>
+          <div class="admin-card-body">
+            <p style="font-size:0.875rem;color:rgba(0,0,0,0.6);line-height:1.6;margin-bottom:1rem;">
+              Interactive 3D figure that grows from age 3 to 20 as the user drags a slider. Uses Three.js geometric primitives to represent human body proportions at each developmental stage.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem;">
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Age Range</span>
+                <span>3–20 years</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Growth Stages</span>
+                <span>5 stages</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">3D Engine</span>
+                <span>Three.js r128</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Controls</span>
+                <span>Rotate, Zoom, Auto-spin</span>
+              </div>
+            </div>
+            <a href="../modules.html#compare-designs" target="_blank" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
+              <i class="fas fa-eye"></i> View Module
+            </a>
+          </div>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="admin-card" style="overflow:visible;">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">
+              <span style="font-size:1.3rem;margin-right:0.5rem;">👦👨</span> Module 2: Junior vs Senior
+            </h3>
+            <span class="status-badge status-read">Active</span>
+          </div>
+          <div class="admin-card-body">
+            <p style="font-size:0.875rem;color:rgba(0,0,0,0.6);line-height:1.6;margin-bottom:1rem;">
+              Side-by-side comparison of two independently controlled 3D figures representing junior and senior students. Age gap is calculated and displayed dynamically.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem;">
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Figures</span>
+                <span>2 (Junior + Senior)</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Independent Sliders</span>
+                <span>Yes</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Gap Display</span>
+                <span>Dynamic calculation</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Layout</span>
+                <span>Split-screen</span>
+              </div>
+            </div>
+            <a href="../modules.html#compare-designs" target="_blank" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
+              <i class="fas fa-eye"></i> View Module
+            </a>
+          </div>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="admin-card" style="overflow:visible;">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">
+              <span style="font-size:1.3rem;margin-right:0.5rem;">⚧</span> Module 3: Male &amp; Female Growth
+            </h3>
+            <span class="status-badge status-read">Active</span>
+          </div>
+          <div class="admin-card-body">
+            <p style="font-size:0.875rem;color:rgba(0,0,0,0.6);line-height:1.6;margin-bottom:1rem;">
+              Toggle between male and female 3D figures with age slider. Male and female figures have different proportions including shoulder width, height, and hair length.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem;">
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Genders</span>
+                <span>Male + Female</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Proportional Diff.</span>
+                <span>Yes (accurate)</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Stage Info</span>
+                <span>Gender-specific facts</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Switch Animation</span>
+                <span>Instant rebuild</span>
+              </div>
+            </div>
+            <a href="../modules.html#compare-designs" target="_blank" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
+              <i class="fas fa-eye"></i> View Module
+            </a>
+          </div>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="admin-card" style="overflow:visible;">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">
+              <span style="font-size:1.3rem;margin-right:0.5rem;">🏫</span> Module 4: School Comparison
+            </h3>
+            <span class="status-badge status-read">Active</span>
+          </div>
+          <div class="admin-card-body">
+            <p style="font-size:0.875rem;color:rgba(0,0,0,0.6);line-height:1.6;margin-bottom:1rem;">
+              Select any two partner schools from dropdowns and compare their average student age profiles. Shows 3D figures scaled to each school's average student age with detailed comparison table.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem;">
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Schools Available</span>
+                <span id="module4-school-count">12</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Data Source</span>
+                <span>schools.json</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Comparison Table</span>
+                <span>8 data points</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                <span style="color:rgba(0,0,0,0.4);">Auto-rotate</span>
+                <span>Yes</span>
+              </div>
+            </div>
+            <a href="../modules.html#compare-designs" target="_blank" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
+              <i class="fas fa-eye"></i> View Module
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tech Stack Info -->
+      <div class="admin-card" style="margin-top:1.25rem;">
+        <div class="admin-card-header">
+          <h3 class="admin-card-title"><i class="fas fa-code" style="color:#a855f7;margin-right:0.5rem;"></i>Technical Stack</h3>
+        </div>
+        <div class="admin-card-body">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
+            <div style="text-align:center;padding:1rem;background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.07);border-radius:6px;">
+              <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎨</div>
+              <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.25rem;">Three.js</div>
+              <div style="font-size:0.75rem;color:rgba(0,0,0,0.4);">r128 · 3D Rendering</div>
+            </div>
+            <div style="text-align:center;padding:1rem;background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.07);border-radius:6px;">
+              <div style="font-size:1.5rem;margin-bottom:0.5rem;">🗺️</div>
+              <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.25rem;">Leaflet.js</div>
+              <div style="font-size:0.75rem;color:rgba(0,0,0,0.4);">v1.9.4 · Maps</div>
+            </div>
+            <div style="text-align:center;padding:1rem;background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.07);border-radius:6px;">
+              <div style="font-size:1.5rem;margin-bottom:0.5rem;">💅</div>
+              <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.25rem;">CSS3</div>
+              <div style="font-size:0.75rem;color:rgba(0,0,0,0.4);">Glassmorphism · Animations</div>
+            </div>
+            <div style="text-align:center;padding:1rem;background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.07);border-radius:6px;">
+              <div style="font-size:1.5rem;margin-bottom:0.5rem;">🐘</div>
+              <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.25rem;">PHP 7+</div>
+              <div style="font-size:0.75rem;color:rgba(0,0,0,0.4);">Backend · JSON Storage</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  if (sessionStorage.getItem('adminLoggedIn') !== 'true') window.location.href = 'login.html';
+
+  const adminName = sessionStorage.getItem('adminName') || 'Admin';
+  document.getElementById('adminNameDisplay').textContent = adminName;
+  document.getElementById('userAvatar').textContent = adminName.charAt(0);
+
+  // Load school count for module 4
+  fetch('../data/schools.json')
+    .then(r => r.json())
+    .then(d => {
+      const el = document.getElementById('module4-school-count');
+      if (el) el.textContent = (d.schools || []).length;
+    })
+    .catch(() => {});
+
+  function logout() {
+    sessionStorage.removeItem('adminLoggedIn');
+    sessionStorage.removeItem('adminName');
+    window.location.href = 'login.html';
+  }
+
+  function checkMobile() {
+    const t = document.getElementById('sidebarToggle');
+    if (t) t.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+  // Mobile sidebar toggle click outside to close
+  document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    if (sidebar && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

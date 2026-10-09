@@ -1,0 +1,37 @@
+{
+    "contacts": [
+        {
+            "id": 3,
+            "date": "2026-10-05",
+            "name": "hjfjkh hjfj",
+            "email": "abhisjkgkghekraj8@gmail.com",
+            "phone": "+919241590861",
+            "school": "General Enquiry",
+            "subject": "New General Enquiry Enquiry",
+            "message": "df",
+            "status": "New"
+        },
+        {
+            "id": 1,
+            "date": "2026-10-05",
+            "name": "Abhishek Raj",
+            "email": "abhishekraj5508@gmail.com",
+            "phone": "+919241590861",
+            "school": "General Enquiry",
+            "subject": "New General Enquiry Enquiry",
+            "message": "jj",
+            "status": "New"
+        },
+        {
+            "id": 2,
+            "name": "Abhishek Raj",
+            "email": "abhishekraj5508@gmail.com",
+            "phone": "+919241590861",
+            "school": "",
+            "subject": "other",
+            "message": "jj",
+            "timestamp": "2026-10-05 21:53:47",
+            "status": "new"
+        }
+    ]
+}

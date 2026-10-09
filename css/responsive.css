@@ -1,0 +1,1417 @@
+/* ===================================================
+   THE STITCH ROOM - Responsive CSS
+   responsive.css
+   =================================================== */
+
+/* ===================================================
+   1200px - Large Screens / Wide Desktops
+   =================================================== */
+@media (max-width: 1200px) {
+  :root {
+    --font-size-6xl: 4rem;
+    --font-size-5xl: 3rem;
+  }
+
+  .container {
+    max-width: 960px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .module-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats .container {
+    gap: 1.25rem;
+  }
+
+  .module-layout {
+    grid-template-columns: 1fr 340px;
+  }
+}
+
+/* ===================================================
+   992px - Tablets Landscape / Small Desktops
+   =================================================== */
+@media (max-width: 992px) {
+  :root {
+    --navbar-height: 65px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0 1.5rem;
+  }
+
+  /* Navbar */
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  /* Hero */
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  /* Stats */
+  .stats .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Module Cards */
+  .module-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* About - Mission */
+  .mission-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .mission-visual {
+    order: -1;
+  }
+
+  /* Why Choose Us */
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  /* Provide */
+  .provide-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Schools */
+  .schools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Contact */
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  /* Module Layout */
+  .module-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .module-controls-panel {
+    max-width: 100%;
+  }
+
+  /* Comparison Layout */
+  .comparison-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .comparison-center {
+    flex-direction: row;
+    min-height: auto;
+    justify-content: center;
+    gap: 1rem;
+    order: 0;
+  }
+
+  /* Admin */
+  .admin-sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+
+  .admin-main {
+    margin-left: 220px;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* School selects */
+  .school-selects {
+    grid-template-columns: 1fr;
+  }
+
+  .school-selects .vs-divider {
+    margin: 0 auto;
+  }
+}
+
+/* ===================================================
+   768px - Tablets Portrait
+   =================================================== */
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 60px;
+    --spacing-4xl: 4rem;
+    --spacing-3xl: 3rem;
+  }
+
+  /* Typography scale down */
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+  }
+
+  /* Navbar */
+  #navbar {
+    padding: 0 1.25rem;
+  }
+
+  .nav-logo span:last-child {
+    display: none;
+  }
+
+  .nav-logo .logo-sub {
+    display: none;
+  }
+
+  /* Hero */
+  .hero {
+    padding: calc(var(--navbar-height) + 2rem) 1.5rem 5rem;
+    min-height: 100svh;
+  }
+
+  .hero-title {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    letter-spacing: -0.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero-orb-1 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .hero-orb-2 {
+    width: 250px;
+    height: 250px;
+  }
+
+  /* Stats */
+  .stats .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  /* Map */
+  #home-map,
+  #clients-map {
+    height: 350px;
+  }
+
+  /* Module Cards */
+  .module-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  /* About */
+  .provide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-features {
+    grid-template-columns: 1fr;
+  }
+
+  /* Clients - Filter Tabs */
+  .filter-tabs {
+    gap: 0.4rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+
+  .filter-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* Schools Grid */
+  .schools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Modules page */
+  .module-section {
+    padding: 3rem 0;
+  }
+
+  .threejs-canvas-container canvas {
+    height: 350px !important;
+  }
+
+  .gender-tabs {
+    gap: 0.5rem;
+  }
+
+  .gender-tab {
+    padding: 0.55rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* Contact */
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    grid-column: auto;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  /* Page Hero */
+  .page-hero {
+    padding: calc(var(--navbar-height) + 3rem) 1.5rem 4rem;
+  }
+
+  .page-hero-title {
+    font-size: 2rem;
+  }
+
+  /* Admin */
+  .admin-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    width: 240px;
+    min-width: 240px;
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .admin-main {
+    margin-left: 0;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-content {
+    padding: 1.25rem;
+  }
+
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Grid utilities */
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Scroll top */
+  #scrollTop {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===================================================
+   576px - Mobile Landscape
+   =================================================== */
+@media (max-width: 576px) {
+  :root {
+    --spacing-4xl: 3rem;
+    --spacing-3xl: 2.5rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Section */
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .section-tag {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.85rem;
+  }
+
+  /* Navbar */
+  #navbar {
+    padding: 0 1rem;
+  }
+
+  .nav-logo .logo-text {
+    font-size: 1rem;
+  }
+
+  /* Hero */
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.6rem, 8vw, 2.2rem);
+  }
+
+  /* Stats */
+  .stats .container {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+  }
+
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+
+  /* Module Cards */
+  .module-cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* Buttons */
+  .btn-lg {
+    padding: 0.875rem 2rem;
+    font-size: 0.95rem;
+  }
+
+  /* Three.js canvas */
+  .threejs-canvas-container canvas {
+    height: 300px !important;
+  }
+
+  .threejs-canvas-container {
+    min-height: 300px;
+  }
+
+  /* Control buttons */
+  .control-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+  }
+
+  /* Age display */
+  .age-number {
+    font-size: 2.5rem;
+  }
+
+  /* School card */
+  .school-card-body {
+    padding: 1.25rem;
+  }
+
+  .school-card-meta {
+    gap: 0.75rem;
+  }
+
+  /* Contact */
+  .contact-form-wrapper {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .contact-detail-item {
+    padding: 1rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 3rem 0 1.5rem;
+  }
+
+  .footer-grid {
+    gap: 1.5rem;
+  }
+
+  /* Admin */
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-topbar {
+    padding: 0 1rem;
+  }
+
+  .admin-user-name {
+    display: none;
+  }
+
+  /* Table scroll */
+  .admin-card {
+    overflow-x: auto;
+  }
+
+  .admin-table {
+    min-width: 600px;
+  }
+
+  /* Modal */
+  .admin-modal {
+    max-width: 100%;
+  }
+
+  .admin-modal-overlay {
+    padding: 1rem;
+    align-items: flex-end;
+  }
+
+  .admin-modal {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    max-height: 85vh;
+  }
+
+  /* Quick actions */
+  .quick-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Login */
+  .admin-login-card {
+    padding: 2rem 1.5rem;
+  }
+
+  /* Comparison */
+  .comparison-layout {
+    gap: 1rem;
+  }
+
+  .gap-display {
+    padding: 1rem;
+    min-width: 100px;
+  }
+
+  .gap-number {
+    font-size: 2rem;
+  }
+}
+
+/* ===================================================
+   500px - Mobile Portrait
+   =================================================== */
+@media (max-width: 500px) {
+  /* Typography */
+  :root {
+    font-size: 15px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  /* Hero */
+  .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  /* Stat Cards */
+  .stats .container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Module card icon */
+  .module-card-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
+  }
+
+  .module-card h3 {
+    font-size: 1rem;
+  }
+
+  /* School card */
+  .school-card-image {
+    height: 150px;
+  }
+
+  .school-card-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .school-card-actions .btn {
+    width: 100%;
+  }
+
+  /* Filter tabs */
+  .filter-tab {
+    padding: 0.45rem 0.875rem;
+    font-size: 0.75rem;
+  }
+
+  /* Page hero */
+  .page-hero-title {
+    font-size: 1.75rem;
+  }
+
+  /* Contact detail */
+  .contact-detail-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    font-size: 0.9rem;
+  }
+
+  /* Footer social */
+  .footer-social {
+    flex-wrap: wrap;
+  }
+
+  /* Canvas */
+  .threejs-canvas-container canvas {
+    height: 260px !important;
+  }
+
+  .threejs-canvas-container {
+    min-height: 260px;
+  }
+
+  /* Admin login */
+  .admin-login-page {
+    padding: 1rem;
+  }
+
+  .admin-login-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .admin-login-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.6rem;
+  }
+
+  /* Toast */
+  .toast {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    min-width: unset;
+  }
+
+  /* Confirm dialog */
+  .confirm-dialog-box {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    font-size: 0.75rem;
+  }
+
+  /* Map */
+  #home-map,
+  #clients-map {
+    height: 280px;
+  }
+
+  /* Mission feature */
+  .mission-feature {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Why item */
+  .why-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Provide card */
+  .provide-card {
+    padding: 1.5rem;
+  }
+
+  /* Gender tabs */
+  .gender-tabs {
+    flex-direction: row;
+  }
+
+  .gender-tab {
+    flex: 1;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* Table toolbar */
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .table-search {
+    max-width: 100%;
+  }
+
+  /* Admin card actions */
+  .admin-modal-footer {
+    flex-direction: column;
+  }
+
+  .admin-modal-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ===================================================
+   320px - Small Mobile
+   =================================================== */
+@media (max-width: 320px) {
+  :root {
+    font-size: 14px;
+    --navbar-height: 56px;
+  }
+
+  .container {
+    padding: 0 0.875rem;
+  }
+
+  #navbar {
+    padding: 0 0.875rem;
+  }
+
+  .nav-logo .logo-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+    letter-spacing: -0.25px;
+  }
+
+  .hero-badge {
+    font-size: 0.7rem;
+  }
+
+  .btn {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .stats .container {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+
+  .module-cards {
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+
+  .footer-grid {
+    gap: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .page-hero-title {
+    font-size: 1.5rem;
+  }
+
+  .school-card-name {
+    font-size: 0.9rem;
+  }
+
+  .admin-stat-number {
+    font-size: 1.5rem;
+  }
+
+  .admin-stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .threejs-canvas-container canvas {
+    height: 220px !important;
+  }
+
+  .threejs-canvas-container {
+    min-height: 220px;
+  }
+
+  .age-number {
+    font-size: 2rem;
+  }
+
+  .control-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .control-btn {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.35rem;
+  }
+
+  .gender-tab {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  #home-map,
+  #clients-map {
+    height: 240px;
+  }
+
+  .admin-login-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .comparison-layout {
+    gap: 0.75rem;
+  }
+
+  .gap-number {
+    font-size: 1.75rem;
+  }
+
+  .toast {
+    font-size: 0.8rem;
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* ===================================================
+   Print Styles
+   =================================================== */
+@media print {
+  #navbar,
+  #loader,
+  .hamburger,
+  .mobile-menu,
+  #scrollTop,
+  .toast,
+  .hero-bg,
+  .particles,
+  .scroll-indicator {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .section {
+    page-break-inside: avoid;
+  }
+
+  .glass-card,
+  .school-card,
+  .stat-card,
+  .module-card {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+  }
+
+  .section-title,
+  h1, h2, h3 {
+    color: black;
+  }
+
+  a {
+    color: #6c63ff;
+  }
+}
+
+/* ===================================================
+   High Contrast Mode
+   =================================================== */
+@media (prefers-contrast: high) {
+  :root {
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --text-secondary: rgba(255, 255, 255, 0.85);
+    --text-muted: rgba(255, 255, 255, 0.65);
+  }
+
+  .btn-outline {
+    border-width: 2px;
+  }
+
+  .nav-links a {
+    color: var(--text-primary);
+  }
+}
+
+/* ===================================================
+   Dark Mode Override (already dark by default)
+   =================================================== */
+@media (prefers-color-scheme: light) {
+  /* The site is designed as dark-only, preserve dark theme */
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* ===================================================
+   Landscape Mobile Adjustments
+   =================================================== */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: calc(var(--navbar-height) + 1rem) 1.5rem 3rem;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  #home-map,
+  #clients-map {
+    height: 250px;
+  }
+
+  .admin-login-page {
+    align-items: flex-start;
+    padding-top: 5rem;
+  }
+}
+
+/* ===================================================
+   Touch Device Optimizations
+   =================================================== */
+@media (hover: none) and (pointer: coarse) {
+  .glass-card:hover,
+  .module-card:hover,
+  .school-card:hover,
+  .stat-card:hover {
+    transform: none;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+
+  .why-item:hover {
+    transform: none;
+  }
+
+  .contact-detail-item:hover {
+    transform: none;
+  }
+
+  /* Larger touch targets */
+  .filter-tab {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .admin-nav-item {
+    min-height: 44px;
+  }
+
+  .nav-links a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .btn {
+    min-height: 44px;
+  }
+}
+
+/* ===================================================
+   MODULES PAGE — Complete Mobile Responsive Fix
+   =================================================== */
+
+/* Tablet landscape (992px) */
+@media (max-width: 992px) {
+
+  /* Module 2 - junior vs senior: 3-col → single col */
+  .m2-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .m2-center-col {
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding-top: 0 !important;
+    gap: 1rem !important;
+  }
+
+  /* Module 3 side-by-side: 2-col → 1-col */
+  .m3-both-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Module 4 two school panels: 2-col → 1-col */
+  .m4-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Module layout (vid + controls): side → stacked */
+  .module-layout {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .module-controls-panel {
+    max-width: 100% !important;
+  }
+
+  /* Gender tabs row */
+  .gender-tabs-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .g-tab {
+    padding: 9px 20px;
+    font-size: 0.85rem;
+  }
+
+  /* video height */
+  .vid-wrapper video { height: 380px !important; }
+  .school-vid-box video { height: 300px !important; }
+
+  /* School selects: vertical */
+  .school-selects {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .school-selects .vs-divider {
+    text-align: center;
+    margin: 0 auto !important;
+  }
+}
+
+/* Tablet portrait (768px) */
+@media (max-width: 768px) {
+
+  /* Video heights */
+  .vid-wrapper video { height: 300px !important; }
+  .school-vid-box video { height: 240px !important; }
+
+  /* Stage banner */
+  .stage-banner {
+    padding: 10px 12px !important;
+    gap: 8px !important;
+  }
+  .stage-age { font-size: 2rem !important; }
+  .stage-icon { font-size: 1.7rem !important; }
+
+  /* Gap card */
+  .gap-card { padding: 12px 10px !important; }
+  .gap-card .gap-num { font-size: 2.4rem !important; }
+  .gap-card .gap-lbl { font-size: 0.65rem !important; }
+  .vs-badge { font-size: 1.1rem !important; padding: 8px 0 !important; }
+
+  /* Play row buttons */
+  .play-row {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+  .play-row .ctrl-btn {
+    flex: 1 1 auto !important;
+    min-width: 100px !important;
+    padding: 9px 12px !important;
+  }
+
+  /* ctrl row */
+  .ctrl-row { gap: 6px !important; }
+  .ctrl-btn {
+    padding: 8px 6px !important;
+    font-size: 0.72rem !important;
+  }
+
+  /* Module header */
+  .module-header { margin-bottom: 2rem !important; }
+  .module-number {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 0.85rem !important;
+  }
+  .module-section .section-title { font-size: 1.5rem !important; }
+  .module-section .section-desc  { font-size: 0.9rem !important; }
+
+  /* Gender tabs full width on mobile */
+  .gender-tabs-row { gap: 6px !important; }
+  .g-tab {
+    flex: 1;
+    justify-content: center;
+    padding: 9px 8px !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Facts box */
+  .facts-box { padding: 10px 12px !important; }
+  .facts-box ul li { font-size: 0.78rem !important; }
+
+  /* Age slider wrap */
+  .slider-pip { font-size: 0.6rem !important; }
+
+  /* Module nav sticky bar */
+  .mod-nav-btn {
+    font-size: 0.72rem !important;
+    padding: 6px 10px !important;
+  }
+
+  /* Both mode sync slider */
+  #m3-both > div:last-child {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Compare column label */
+  .compare-col-label {
+    font-size: 0.65rem !important;
+    letter-spacing: 1px !important;
+  }
+
+  /* Stage badge */
+  .stage-badge {
+    font-size: 0.7rem !important;
+    padding: 0.28rem 0.75rem !important;
+  }
+}
+
+/* Mobile portrait (576px) */
+@media (max-width: 576px) {
+
+  /* Video heights */
+  .vid-wrapper video { height: 240px !important; }
+  .school-vid-box video { height: 200px !important; }
+
+  /* Video badge smaller */
+  .vid-badge {
+    font-size: 0.62rem !important;
+    padding: 3px 8px !important;
+    bottom: 6px !important;
+    left: 6px !important;
+  }
+
+  /* Stage banner compact */
+  .stage-banner {
+    padding: 8px 10px !important;
+    border-radius: 10px !important;
+    margin-bottom: 0.875rem !important;
+  }
+  .stage-age  { font-size: 1.7rem !important; }
+  .stage-icon { font-size: 1.4rem !important; }
+  .stage-name { font-size: 0.82rem !important; }
+  .stage-label{ font-size: 0.62rem !important; }
+
+  /* Gap card */
+  .gap-card .gap-num { font-size: 1.9rem !important; }
+
+  /* ctrl row: 2-column grid */
+  .ctrl-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+  .ctrl-btn { flex: unset !important; }
+
+  /* Play-row: full stack */
+  .play-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 7px !important;
+  }
+  .play-row .ctrl-btn {
+    min-width: unset !important;
+    justify-content: center !important;
+    padding: 10px !important;
+  }
+
+  /* Module section padding */
+  .module-section { padding: 2.5rem 0 !important; }
+  .module-header  { margin-bottom: 1.5rem !important; }
+
+  /* Slider pips: hide middle ones */
+  .slider-pip:nth-child(2),
+  .slider-pip:nth-child(4) { visibility: hidden; }
+
+  /* Module 2 center gap col: compact */
+  .m2-center-col {
+    flex-direction: row !important;
+    gap: 0.75rem !important;
+    justify-content: center !important;
+  }
+  .gap-card { padding: 10px 8px !important; flex: 1; }
+}
+
+/* Small mobile (380px) */
+@media (max-width: 380px) {
+  .vid-wrapper video  { height: 200px !important; }
+  .school-vid-box video { height: 175px !important; }
+  .stage-age  { font-size: 1.5rem !important; }
+  .gap-card .gap-num  { font-size: 1.6rem !important; }
+  .g-tab { font-size: 0.7rem !important; padding: 8px 4px !important; }
+  .ctrl-btn { font-size: 0.65rem !important; padding: 6px 4px !important; }
+  .module-number { width: 28px !important; height: 28px !important; font-size: 0.72rem !important; }
+  .module-section .section-title { font-size: 1.3rem !important; }
+}
+
+/* ===================================================
+   ABOUT PAGE — Complete Mobile Responsive Fix
+   =================================================== */
+
+/* Tablet landscape (992px) */
+@media (max-width: 992px) {
+  .mission-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .mission-visual { order: -1; }
+
+  .why-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .why-grid > div:first-child {
+    text-align: center;
+  }
+  .why-grid > div:first-child .section-title {
+    text-align: center !important;
+    font-size: 1.75rem !important;
+  }
+  .why-grid > div:first-child a.btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .provide-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .mission-features {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Tablet portrait (768px) */
+@media (max-width: 768px) {
+  /* Mission */
+  .mission-text h2 {
+    font-size: 1.6rem !important;
+    line-height: 1.25 !important;
+  }
+  .mission-text p { font-size: 0.9rem !important; }
+
+  .mission-features {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  .mission-feature {
+    padding: 0.875rem !important;
+    border-radius: 10px !important;
+  }
+
+  /* Provide */
+  .provide-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .provide-card { padding: 1.5rem !important; }
+  .provide-card h3 { font-size: 0.95rem !important; }
+  .provide-card p  { font-size: 0.82rem !important; }
+
+  /* Why */
+  .why-list { gap: 0.75rem !important; }
+  .why-item {
+    padding: 0.875rem 1rem !important;
+    border-radius: 12px !important;
+  }
+  .why-item h4 { font-size: 0.88rem !important; }
+  .why-item p  { font-size: 0.78rem !important; line-height: 1.55 !important; }
+
+  /* Mission visual card */
+  .mission-visual-card { padding: 1.5rem !important; }
+  .mission-icon-large  { font-size: 3.5rem !important; }
+
+  /* About CTA buttons */
+  .about-cta-btns {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+  }
+  .about-cta-btns .btn {
+    width: 100% !important;
+    max-width: 300px !important;
+    justify-content: center !important;
+  }
+
+  /* Stats 2x2 */
+  .stats .container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  /* Section padding */
+  .mission-section.section,
+  .provide-section.section,
+  .why-section.section {
+    padding: 3rem 0 !important;
+  }
+
+  /* Glass card CTA */
+  .glass-card h2 { font-size: 1.6rem !important; }
+}
+
+/* Mobile portrait (576px) */
+@media (max-width: 576px) {
+  .mission-text h2 { font-size: 1.4rem !important; }
+
+  .provide-card {
+    padding: 1.25rem !important;
+    border-radius: 12px !important;
+  }
+  .provide-card-icon {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .provide-card h3 { font-size: 0.9rem !important; }
+
+  .mission-feature-icon {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    font-size: 0.85rem !important;
+  }
+  .mission-feature-text h4 { font-size: 0.82rem !important; }
+  .mission-feature-text p  { font-size: 0.74rem !important; }
+
+  .why-check {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    font-size: 0.68rem !important;
+  }
+
+  /* About CTA */
+  .about-cta-btns .btn {
+    max-width: 100% !important;
+    width: 90% !important;
+  }
+
+  .glass-card h2 { font-size: 1.35rem !important; }
+  .glass-card p  { font-size: 0.85rem !important; }
+
+  /* Stats 2x2 always */
+  .stats .container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.875rem !important;
+  }
+  .stat-card { padding: 1.25rem !important; }
+  .stat-number { font-size: 1.75rem !important; }
+}
+
+/* Small mobile (380px) */
+@media (max-width: 380px) {
+  .mission-text h2    { font-size: 1.25rem !important; }
+  .mission-icon-large { font-size: 2.8rem !important; }
+  .provide-card h3    { font-size: 0.85rem !important; }
+  .why-item           { flex-direction: column; gap: 0.5rem; }
+  .glass-card h2      { font-size: 1.2rem !important; }
+}

@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Admin Panel | The Stitch Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <a href="index.html" class="admin-sidebar-logo">
+        <div class="logo-icon"><img src="../logo.jpeg" alt="The Stitch Room Logo" class="nav-logo-img"></div>
+        <div>
+          <span class="logo-text">The Stitch Room</span>
+          <span class="logo-sub">Admin Panel</span>
+        </div>
+      </a>
+      <button class="mobile-close-btn" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('adminSidebar').classList.remove('open');" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="admin-nav">
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Main</span>
+        <a href="index.html" class="admin-nav-item active">
+          <i class="fas fa-home"></i> Dashboard
+        </a>
+        <a href="schools.html" class="admin-nav-item">
+          <i class="fas fa-school"></i> Schools
+        </a>
+        <a href="contacts.html" class="admin-nav-item">
+          <i class="fas fa-envelope"></i> Contacts
+          <span class="admin-nav-badge" id="nav-contacts-count">0</span>
+        </a>
+        <a href="products.html" class="admin-nav-item"><i class="fas fa-tshirt"></i> Product Catalogue</a>
+        <a href="3d-management.html" class="admin-nav-item"><i class="fas fa-cube"></i> 3D & Uniform Config</a>
+        <a href="content.html" class="admin-nav-item"><i class="fas fa-desktop"></i> Website Content</a><a href="customer-portal.html" class="admin-nav-item"><i class="fas fa-users"></i> Customer Portal Preview</a><a href="3d-management.html" class="admin-nav-item"><i class="fas fa-cube"></i> 3D Management</a>
+      </div>
+
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Website</span>
+        <a href="../index.html" target="_blank" class="admin-nav-item">
+          <i class="fas fa-external-link-alt"></i> View Website
+        </a>
+        <a href="../modules.html" target="_blank" class="admin-nav-item">
+          <i class="fas fa-cube"></i> 3D Modules
+        </a>
+      </div>
+
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Account</span>
+        <button class="admin-nav-item" onclick="logout()" style="text-align:left;width:100%;color:rgba(239,68,68,0.8);">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <div style="font-size:0.75rem;color:rgba(0,0,0,0.3);text-align:center;">
+        The Stitch Room &copy; 2024
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="admin-main">
+
+    <!-- TOP BAR -->
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button id="sidebarToggle" class="btn-icon"    onclick="document.getElementById('adminSidebar').classList.toggle('open')">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="admin-topbar-title">Dashboard</div>
+      </div>
+      <div class="admin-topbar-right">
+        <div class="admin-user">
+          <div class="admin-user-avatar" id="userAvatar">A</div>
+          <span class="admin-user-name" id="adminNameDisplay">Admin</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="admin-content">
+
+      <!-- Welcome -->
+      <div style="margin-bottom:2rem;">
+        <h1 class="admin-welcome-title" style="font-size:1.5rem;font-weight:800;margin-bottom:0.25rem;">
+          Welcome back, <span  id="welcomeName">Admin</span> 👋
+        </h1>
+        <p style="color:rgba(0,0,0,0.5);font-size:0.875rem;" id="currentDate"></p>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon purple"><i class="fas fa-school"></i></div>
+          <div>
+            <div class="admin-stat-number" id="stat-schools">0</div>
+            <div class="admin-stat-label">Partner Schools</div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon cyan"><i class="fas fa-envelope"></i></div>
+          <div>
+            <div class="admin-stat-number" id="stat-contacts">0</div>
+            <div class="admin-stat-label">Total Inquiries</div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon green"><i class="fas fa-cube"></i></div>
+          <div>
+            <div class="admin-stat-number">4</div>
+            <div class="admin-stat-label">Active Modules</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Contacts -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3 class="admin-card-title"><i class="fas fa-envelope" style="color:#6c63ff;margin-right:0.5rem;"></i>Recent Inquiries</h3>
+          <a href="contacts.html" class="btn btn-outline btn-sm">View All</a>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="recent-contacts-tbody">
+              <tr>
+                <td colspan="5" style="text-align:center;color:rgba(0,0,0,0.3);padding:2rem;">
+                  <i class="fas fa-inbox" style="font-size:1.5rem;display:block;margin-bottom:0.5rem;"></i>
+                  No contacts yet
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3 class="admin-card-title"><i class="fas fa-bolt" style="color:#f59e0b;margin-right:0.5rem;"></i>Quick Actions</h3>
+        </div>
+        <div class="admin-card-body">
+          <div class="quick-actions">
+            <a href="schools.html" class="quick-action-btn">
+              <i class="fas fa-plus-circle quick-action-icon" style="color:#6c63ff;font-size:1.5rem;"></i>
+              <span class="quick-action-label">Add School</span>
+            </a>
+            <a href="contacts.html" class="quick-action-btn">
+              <i class="fas fa-envelope quick-action-icon" style="color:#00d4ff;font-size:1.5rem;"></i>
+              <span class="quick-action-label">View Contacts</span>
+            </a>
+            <a href="../index.html" target="_blank" class="quick-action-btn">
+              <i class="fas fa-eye quick-action-icon" style="color:#10b981;font-size:1.5rem;"></i>
+              <span class="quick-action-label">View Site</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- System Info -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3 class="admin-card-title"><i class="fas fa-info-circle" style="color:#a855f7;margin-right:0.5rem;"></i>Platform Info</h3>
+        </div>
+        <div class="admin-card-body">
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;">
+            <div style="background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.07);border-radius:6px;padding:1rem;">
+              <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.4rem;">Platform</div>
+              <div style="font-weight:600;font-size:0.9rem;">The Stitch Room</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.07);border-radius:6px;padding:1rem;">
+              <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.4rem;">Version</div>
+              <div style="font-weight:600;font-size:0.9rem;">1.0.0</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.07);border-radius:6px;padding:1rem;">
+              <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.4rem;">Location</div>
+              <div style="font-weight:600;font-size:0.9rem;">Vellore, Tamil Nadu</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.07);border-radius:6px;padding:1rem;">
+              <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.4rem;">Status</div>
+              <div style="font-weight:600;font-size:0.9rem;color:#10b981;"><i class="fas fa-circle" style="font-size:0.5rem;margin-right:0.4rem;"></i> Active</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // Auth check
+  if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+    window.location.href = 'login.html';
+  }
+
+  // Set admin name
+  const adminName = sessionStorage.getItem('adminName') || 'Admin';
+  document.getElementById('adminNameDisplay').textContent = adminName;
+  document.getElementById('welcomeName').textContent = adminName;
+  document.getElementById('userAvatar').textContent = adminName.charAt(0).toUpperCase();
+
+  // Current date
+  document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-IN', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  // Load stats
+  async function loadStats() {
+    try {
+      const r = await fetch('../data/schools.json');
+      const d = await r.json();
+      const count = (d.schools || []).length;
+      document.getElementById('stat-schools').textContent = count;
+    } catch (e) {}
+
+    try {
+      const r = await fetch('../php/admin-contacts.php');
+      const d = await r.json();
+      const contacts = d.contacts || [];
+      const count = contacts.length;
+      document.getElementById('stat-contacts').textContent = count;
+
+      const navBadge = document.getElementById('nav-contacts-count');
+      const newCount = contacts.filter(c => c.status === 'new').length;
+      if (navBadge) navBadge.textContent = newCount || count;
+
+      // Recent contacts
+      const tbody = document.getElementById('recent-contacts-tbody');
+      if (tbody && contacts.length > 0) {
+        const recent = contacts.slice(-5).reverse();
+        tbody.innerHTML = recent.map(c => `
+          <tr>
+            <td style="font-weight:500;color:rgba(0,0,0,0.9);">${c.name || '-'}</td>
+            <td><a href="mailto:${c.email}" style="color:#6c63ff;">${c.email || '-'}</a></td>
+            <td>${c.subject || c.message?.substring(0, 30) + '...' || '-'}</td>
+            <td style="font-size:0.8rem;">${c.timestamp ? new Date(c.timestamp).toLocaleDateString('en-IN') : '-'}</td>
+            <td><span class="status-badge ${c.status === 'new' ? 'status-new' : 'status-read'}">${c.status || 'new'}</span></td>
+          </tr>`).join('');
+      }
+    } catch (e) {}
+  }
+
+  loadStats();
+
+  function logout() {
+    sessionStorage.removeItem('adminLoggedIn');
+    sessionStorage.removeItem('adminName');
+    window.location.href = 'login.html';
+  }
+
+  // Mobile sidebar toggle
+  function checkMobile() {
+    const toggle = document.getElementById('sidebarToggle');
+    if (window.innerWidth <= 768) {
+      if (toggle) toggle.style.display = 'flex';
+    } else {
+      if (toggle) toggle.style.display = 'none';
+      document.getElementById('adminSidebar').classList.remove('open');
+    }
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+  // Mobile sidebar toggle click outside to close
+  document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    if (sidebar && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

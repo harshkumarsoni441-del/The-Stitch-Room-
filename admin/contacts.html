@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacts - Admin Panel | The Stitch Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <a href="index.html" class="admin-sidebar-logo">
+        <div class="logo-icon"><img src="../logo.jpeg" alt="The Stitch Room Logo" class="nav-logo-img"></div>
+        <div>
+          <span class="logo-text">The Stitch Room</span>
+          <span class="logo-sub">Admin Panel</span>
+        </div>
+      </a>
+      <button class="mobile-close-btn" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('adminSidebar').classList.remove('open');" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="admin-nav">
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Main</span>
+        <a href="index.html" class="admin-nav-item"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="schools.html" class="admin-nav-item"><i class="fas fa-school"></i> Schools</a>
+        <a href="contacts.html" class="admin-nav-item active"><i class="fas fa-envelope"></i> Contacts</a>
+      </div>
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Website</span>
+        <a href="../index.html" target="_blank" class="admin-nav-item"><i class="fas fa-external-link-alt"></i> View Website</a>
+      </div>
+      <div class="admin-nav-section">
+        <span class="admin-nav-label">Account</span>
+        <button class="admin-nav-item" onclick="logout()" style="text-align:left;width:100%;color:rgba(239,68,68,0.8);">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button class="btn-icon" id="sidebarToggle"    onclick="document.getElementById('adminSidebar').classList.toggle('open')">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="admin-topbar-title">Contact Inquiries</div>
+      </div>
+      <div class="admin-topbar-right">
+        <div class="admin-user">
+          <div class="admin-user-avatar" id="userAvatar">A</div>
+          <span class="admin-user-name" id="adminNameDisplay">Admin</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- Stats Row -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;">
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon purple"><i class="fas fa-inbox"></i></div>
+          <div>
+            <div class="admin-stat-number" id="total-contacts">0</div>
+            <div class="admin-stat-label">Total Inquiries</div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon cyan"><i class="fas fa-bell"></i></div>
+          <div>
+            <div class="admin-stat-number" id="new-contacts">0</div>
+            <div class="admin-stat-label">New / Unread</div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon green"><i class="fas fa-check-circle"></i></div>
+          <div>
+            <div class="admin-stat-number" id="read-contacts">0</div>
+            <div class="admin-stat-label">Read</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3 class="admin-card-title"><i class="fas fa-envelope" style="color:#6c63ff;margin-right:0.5rem;"></i>All Inquiries (<span id="contact-count">0</span>)</h3>
+          <div style="display:flex;gap:0.5rem;">
+            <div class="table-search">
+              <i class="fas fa-search"></i>
+              <input type="text" id="contactSearch" placeholder="Search contacts..." oninput="filterContacts(this.value)">
+            </div>
+            <select class="form-input" style="padding:0.5rem 0.75rem;background:rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.1);border-radius:8px;color:#fff;font-family:Poppins,sans-serif;font-size:0.8rem;min-width:120px;" id="statusFilter" onchange="filterContacts(document.getElementById('contactSearch').value)">
+              <option value="all">All Status</option>
+              <option value="new">New</option>
+              <option value="read">Read</option>
+            </select>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="contacts-tbody">
+              <tr><td colspan="8" style="text-align:center;padding:3rem;"><div class="canvas-loading-spinner" style="margin:0 auto;"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW CONTACT MODAL -->
+<div class="admin-modal-overlay" id="viewModal">
+  <div class="admin-modal" style="max-width:500px;">
+    <div class="admin-modal-header">
+      <h3>Contact Details</h3>
+      <button class="modal-close-btn" onclick="closeViewModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="admin-modal-body" id="viewModalBody">
+    </div>
+    <div class="admin-modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="closeViewModal()">Close</button>
+      <button class="btn btn-primary btn-sm" id="markReadBtn" onclick="markRead()">
+        <i class="fas fa-check"></i> Mark as Read
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM DELETE -->
+<div class="confirm-dialog" id="confirmDialog">
+  <div class="confirm-dialog-box">
+    <div class="confirm-dialog-icon">🗑️</div>
+    <div class="confirm-dialog-title">Delete Contact?</div>
+    <div class="confirm-dialog-text">This inquiry will be permanently deleted.</div>
+    <div class="confirm-dialog-actions">
+      <button class="btn btn-outline btn-sm" onclick="closeConfirm()">Cancel</button>
+      <button class="btn btn-sm" style="background:rgba(239,68,68,0.8);color:white;" onclick="confirmDelete()">
+        <i class="fas fa-trash"></i> Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  if (sessionStorage.getItem('adminLoggedIn') !== 'true') window.location.href = 'login.html';
+
+  const adminName = sessionStorage.getItem('adminName') || 'Admin';
+  document.getElementById('adminNameDisplay').textContent = adminName;
+  document.getElementById('userAvatar').textContent = adminName.charAt(0);
+
+  let contacts = [];
+  let currentViewId = null;
+  let deleteId = null;
+
+  async function loadContacts() {
+    try {
+      const r = await fetch('../php/admin-contacts.php');
+      const d = await r.json();
+      contacts = d.contacts || [];
+      renderContacts(contacts);
+      updateStats();
+    } catch (e) {
+      document.getElementById('contacts-tbody').innerHTML =
+        '<tr><td colspan="8" style="text-align:center;padding:2rem;color:rgba(0,0,0,0.4);">No contacts found or failed to load.</td></tr>';
+    }
+  }
+
+  function updateStats() {
+    const newCount  = contacts.filter(c => c.status !== 'read').length;
+    const readCount = contacts.filter(c => c.status === 'read').length;
+    document.getElementById('total-contacts').textContent = contacts.length;
+    document.getElementById('new-contacts').textContent = newCount;
+    document.getElementById('read-contacts').textContent = readCount;
+  }
+
+  function renderContacts(data) {
+    document.getElementById('contact-count').textContent = data.length;
+    if (!data.length) {
+      document.getElementById('contacts-tbody').innerHTML =
+        `<tr><td colspan="8" style="text-align:center;padding:3rem;color:rgba(0,0,0,0.3);">
+          <i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:0.75rem;opacity:0.4;"></i>
+          No contact inquiries yet.<br>
+          <small style="font-size:0.75rem;opacity:0.6;">Inquiries from the contact form will appear here.</small>
+        </td></tr>`;
+      return;
+    }
+
+    document.getElementById('contacts-tbody').innerHTML = data.slice().reverse().map(c => `
+      <tr>
+        <td style="color:rgba(0,0,0,0.4);font-size:0.8rem;">${c.id}</td>
+        <td style="font-weight:600;color:rgba(0,0,0,0.9);">${c.name || '-'}</td>
+        <td><a href="mailto:${c.email || ''}" style="color:#6c63ff;font-size:0.85rem;">${c.email || '-'}</a></td>
+        <td style="font-size:0.85rem;">${c.phone || '-'}</td>
+        <td style="max-width:200px;font-size:0.82rem;color:rgba(0,0,0,0.6);">${(c.message || '').substring(0, 50)}${(c.message || '').length > 50 ? '...' : ''}</td>
+        <td style="font-size:0.8rem;white-space:nowrap;">${c.timestamp ? new Date(c.timestamp).toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}) : '-'}</td>
+        <td><span class="status-badge ${c.status === 'read' ? 'status-read' : 'status-new'}">${c.status || 'new'}</span></td>
+        <td>
+          <div style="display:flex;gap:0.4rem;">
+            <button class="btn btn-outline btn-sm" style="padding:0.35rem 0.65rem;font-size:0.75rem;" onclick="viewContact(${c.id})" title="View">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="btn btn-sm" style="padding:0.35rem 0.65rem;font-size:0.75rem;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:rgba(239,68,68,0.8);" onclick="openDeleteConfirm(${c.id})" title="Delete">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>`).join('');
+  }
+
+  function filterContacts(query) {
+    const q = query.toLowerCase();
+    const status = document.getElementById('statusFilter').value;
+    let filtered = contacts.filter(c =>
+      (c.name || '').toLowerCase().includes(q) ||
+      (c.email || '').toLowerCase().includes(q) ||
+      (c.message || '').toLowerCase().includes(q)
+    );
+    if (status !== 'all') {
+      filtered = filtered.filter(c => (c.status || 'new') === status);
+    }
+    renderContacts(filtered);
+  }
+
+  function viewContact(id) {
+    const c = contacts.find(c => c.id === id);
+    if (!c) return;
+    currentViewId = id;
+
+    document.getElementById('viewModalBody').innerHTML = `
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+          <div>
+            <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.3rem;">Name</div>
+            <div style="font-weight:600;">${c.name || '-'}</div>
+          </div>
+          <div>
+            <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.3rem;">Status</div>
+            <span class="status-badge ${c.status === 'read' ? 'status-read' : 'status-new'}">${c.status || 'new'}</span>
+          </div>
+          <div>
+            <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.3rem;">Email</div>
+            <a href="mailto:${c.email}" style="color:#6c63ff;font-size:0.9rem;">${c.email || '-'}</a>
+          </div>
+          <div>
+            <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.3rem;">Phone</div>
+            <div style="font-size:0.9rem;">${c.phone || '-'}</div>
+          </div>
+          <div>
+            <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.3rem;">School</div>
+            <div style="font-size:0.9rem;">${c.school || '-'}</div>
+          </div>
+          <div>
+            <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.3rem;">Subject</div>
+            <div style="font-size:0.9rem;">${c.subject || '-'}</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.7rem;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;">Message</div>
+          <div style="background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.08);border-radius:6px;padding:1rem;font-size:0.875rem;color:rgba(0,0,0,0.8);line-height:1.6;">${c.message || 'No message'}</div>
+        </div>
+        <div style="font-size:0.8rem;color:rgba(0,0,0,0.4);">
+          <i class="fas fa-clock" style="margin-right:0.4rem;"></i>
+          Received: ${c.timestamp ? new Date(c.timestamp).toLocaleString('en-IN') : '-'}
+        </div>
+      </div>`;
+
+    const markReadBtn = document.getElementById('markReadBtn');
+    if (c.status === 'read') {
+      markReadBtn.style.display = 'none';
+    } else {
+      markReadBtn.style.display = '';
+    }
+
+    document.getElementById('viewModal').classList.add('open');
+  }
+
+  async function markRead() {
+    const contact = contacts.find(c => c.id === currentViewId);
+    if (!contact) return;
+    contact.status = 'read';
+
+    try {
+      const formData = new FormData();
+      formData.append('id', contact.id);
+      formData.append('status', 'read');
+      await fetch('../php/save-contact.php', { method: 'POST', body: formData });
+    } catch (e) {}
+
+    updateStats();
+    renderContacts(contacts);
+    document.getElementById('markReadBtn').style.display = 'none';
+    showToast('Marked as read!', 'success');
+  }
+
+  function closeViewModal() {
+    document.getElementById('viewModal').classList.remove('open');
+    currentViewId = null;
+  }
+
+  function openDeleteConfirm(id) {
+    deleteId = id;
+    document.getElementById('confirmDialog').classList.add('open');
+  }
+
+  function closeConfirm() {
+    deleteId = null;
+    document.getElementById('confirmDialog').classList.remove('open');
+  }
+
+  async function confirmDelete() {
+    if (!deleteId) return;
+    contacts = contacts.filter(c => c.id !== deleteId);
+    renderContacts(contacts);
+    updateStats();
+    closeConfirm();
+    showToast('Contact deleted!', 'success');
+
+    try {
+      const formData = new FormData();
+      formData.append('id', deleteId);
+      await fetch('../php/delete-contact.php', { method: 'POST', body: formData });
+    } catch (e) {}
+  }
+
+  function showToast(msg, type = 'success') {
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    t.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i><span>${msg}</span>`;
+    document.body.appendChild(t);
+    requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 3000);
+  }
+
+  function logout() {
+    sessionStorage.removeItem('adminLoggedIn');
+    sessionStorage.removeItem('adminName');
+    window.location.href = 'login.html';
+  }
+
+  function checkMobile() {
+    const t = document.getElementById('sidebarToggle');
+    if (t) t.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+
+  document.getElementById('viewModal').addEventListener('click', function(e) {
+    if (e.target === this) closeViewModal();
+  });
+
+  loadContacts();
+  // Mobile sidebar toggle click outside to close
+  document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    if (sidebar && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

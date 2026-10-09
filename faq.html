@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ & Information Center - The Stitch Room</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .page-hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 120px 0 60px; text-align: center; position: relative; overflow: hidden; }
+    .faq-layout { display: flex; gap: 40px; align-items: flex-start; max-width: 1200px; margin: 60px auto; padding: 0 20px; }
+    .faq-sidebar { width: 300px; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); padding: 20px; position: sticky; top: 100px; flex-shrink: 0; }
+    .faq-cat-btn { display: block; width: 100%; text-align: left; padding: 12px 20px; border: none; background: transparent; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 500; color: #475569; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-bottom: 5px; }
+    .faq-cat-btn:hover { background: #f8fafc; color: #c97550; }
+    .faq-cat-btn.active { background: linear-gradient(135deg, #c97550, #df9a70); color: white; font-weight: 600; box-shadow: 0 4px 15px rgba(201,117,80,0.19); }
+    
+    .faq-content { flex: 1; min-width: 0; }
+    .faq-group { display: none; animation: fadeIn 0.4s ease; }
+    .faq-group.active { display: block; }
+    .faq-group h2 { color: #0f172a; margin-top: 0; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #e2e8f0; font-size: 1.8rem; }
+    
+    .faq-item { background: white; margin-bottom: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; overflow: hidden; transition: 0.3s; }
+    .faq-item:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .faq-question { padding: 20px; font-size: 1.1rem; font-weight: 600; color: #1e293b; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; margin: 0; }
+    .faq-question i { color: #c97550; transition: transform 0.3s; }
+    .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; color: #475569; line-height: 1.6; }
+    .faq-item.open .faq-question i { transform: rotate(180deg); }
+    .faq-item.open .faq-answer { padding: 0 20px 20px 20px; max-height: 500px; }
+
+    @media (max-width: 900px) {
+      .faq-layout { flex-direction: column; }
+      .faq-sidebar { width: 100%; position: static; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/site-polish.css">
+</head>
+<body>
+
+<nav id="navbar" class="main-header">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon"><img src="logo.jpeg" alt="Logo" class="nav-logo-img"></div>
+    <div><span class="logo-text">The Stitch Room</span><span class="logo-sub">Made for every day</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="clients.html">Our Clients</a></li>
+    <li><a href="modules.html">Uniform Comparison</a></li>
+    <li><a href="3d-showroom.html">3D Uniform Studio</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="fas fa-home"></i> Home</a><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a><a href="clients.html"><i class="fas fa-school"></i> Our Clients</a><a href="modules.html"><i class="fas fa-shirt"></i> Uniform Comparison</a><a href="3d-showroom.html"><i class="fas fa-cube"></i> 3D Uniform Studio</a><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+</div>
+
+<section class="page-hero">
+  <div class="container" style="position:relative; z-index:2;">
+    <h1 style="font-size:3rem; font-weight:800; margin-bottom:15px;">FAQ & <span style="color:#c97550;">Information System</span></h1>
+    <p style="font-size:1.1rem; color:#cbd5e1; max-width:600px; margin:0 auto;">Find answers regarding school partnerships, ordering processes, corporate requirements, and uniform customizations.</p>
+  </div>
+</section>
+
+<div class="faq-layout">
+  <!-- Categories Sidebar -->
+  <aside class="faq-sidebar" data-reveal="fade-right">
+    <h3 style="margin-top:0; color:#0f172a; margin-bottom:15px; font-size:1.2rem;">Topics</h3>
+    <button class="faq-cat-btn active" onclick="switchFAQ('partnerships', this)"><i class="fas fa-handshake" style="width:25px;"></i> School Partnerships</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('uniforms', this)"><i class="fas fa-tshirt" style="width:25px;"></i> Uniform & Customization</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('parents', this)"><i class="fas fa-users" style="width:25px;"></i> Parent/Customer Guidance</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('ordering', this)"><i class="fas fa-shopping-cart" style="width:25px;"></i> Ordering & Bulk Info</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('corporate', this)"><i class="fas fa-briefcase" style="width:25px;"></i> Corporate & Hospital</button>
+    <button class="faq-cat-btn" onclick="switchFAQ('onboarding', this)"><i class="fas fa-network-wired" style="width:25px;"></i> Network Onboarding</button>
+  </aside>
+
+  <!-- FAQ Content Area -->
+  <div class="faq-content" id="faq-content-container" data-reveal="fade-up">
+    <!-- Rendered via JS -->
+  </div>
+</div>
+
+<!-- Floating Contact -->
+<div class="floating-contact">
+  <a href="https://wa.me/917812879053" target="_blank" class="float-btn float-wa" title="WhatsApp Us"><i class="fab fa-whatsapp"></i></a>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+  // Admin-managed FAQ entries simulation (in reality fetched from data/faqs.json)
+  const faqData = {
+    partnerships: [
+      { q: "How can our school partner with The Stitch Room?", a: "Schools can submit a partnership enquiry via our Contact page. Our team will schedule a consultation to discuss your uniform requirements, design needs, and onboarding process." },
+      { q: "What are the benefits of a school partnership?", a: "Partner schools receive a dedicated 3D catalogue, automated parent ordering portals, bulk discounts, and custom branding options." }
+    ],
+    uniforms: [
+      { q: "Can we customize the fabric and colors?", a: "Yes, we offer extensive customization options including fabric choice (cotton, poly-viscose, etc.), exact pantone color matching, and custom embroidery for logos." },
+      { q: "What sizes are available?", a: "We manufacture all standard sizes for Junior and Senior categories. Custom tailoring and Made-to-Order sizes are also available upon request." }
+    ],
+    parents: [
+      { q: "How do I order uniforms for my child?", a: "Parents can log into the Customer Portal, select their child's school, view the approved catalogue, and place an order directly online." },
+      { q: "What is the return/exchange policy?", a: "Standard sizes can be exchanged within 7 days of delivery. Custom-fitted items are non-refundable unless there is a manufacturing defect." }
+    ],
+    ordering: [
+      { q: "Is there a minimum quantity for bulk orders?", a: "For initial bulk manufacturing, we typically require a minimum of 100 pieces per design. However, reorders through the parent portal have no minimum limits." },
+      { q: "What are the payment options for bulk orders?", a: "Bulk orders require a 50% advance payment via Bank Transfer, NEFT, or corporate cheque. The balance is due upon dispatch." }
+    ],
+    corporate: [
+      { q: "Do you supply hospital scrubs and lab coats?", a: "Yes, we manufacture medical-grade scrubs, lab coats, and patient gowns with fluid-resistant and anti-microbial fabric options." },
+      { q: "Can we get custom uniforms for our corporate staff?", a: "Absolutely. We design and supply premium executive wear, daily staff uniforms, and security attire for organizations of all sizes." }
+    ],
+    onboarding: [
+      { q: "How long does it take to onboard a new school?", a: "From design approval to setting up your 3D showroom and parent portal, the onboarding process takes approximately 2-3 weeks." },
+      { q: "Do you provide sample uniforms before finalizing?", a: "Yes, once the digital 3D designs are approved, we create physical samples for the management's final approval before starting bulk production." }
+    ]
+  };
+
+  const titles = {
+    partnerships: "School Partnerships", uniforms: "Uniform & Customization",
+    parents: "Parent & Customer Guidance", ordering: "Ordering & Bulk Information",
+    corporate: "Corporate & Hospital Requirements", onboarding: "School-Network Onboarding"
+  };
+
+  function renderFAQs() {
+    const container = document.getElementById('faq-content-container');
+    container.innerHTML = '';
+    
+    Object.keys(faqData).forEach((key, index) => {
+      const group = document.createElement('div');
+      group.className = `faq-group ${index === 0 ? 'active' : ''}`;
+      group.id = `faq-${key}`;
+      
+      let html = `<h2>${titles[key]}</h2>`;
+      faqData[key].forEach(item => {
+        html += `
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <h4 class="faq-question">${item.q} <i class="fas fa-chevron-down"></i></h4>
+            <div class="faq-answer"><p style="margin-top:10px;">${item.a}</p></div>
+          </div>
+        `;
+      });
+      group.innerHTML = html;
+      container.appendChild(group);
+    });
+  }
+
+  function switchFAQ(id, btn) {
+    document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.faq-group').forEach(g => g.classList.remove('active'));
+    document.getElementById(`faq-${id}`).classList.add('active');
+  }
+
+  document.addEventListener('DOMContentLoaded', renderFAQs);
+</script>
+</body>
+</html>
+
+
+
+
