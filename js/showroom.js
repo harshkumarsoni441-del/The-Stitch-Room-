@@ -150,7 +150,6 @@
       sphere(avatar,trim,side*.105,h.headY+.03,h.headR*.87,.009,.011,.006);
     }
     sphere(avatar,skin,0,h.headY-.075,h.headR*.91,.035,.055,.045);
-    // subtle smile as a slim warm curve
     const smilePts=[new THREE.Vector3(-.065,h.headY-.16,h.headR*.78),new THREE.Vector3(0,h.headY-.18,h.headR*.83),new THREE.Vector3(.065,h.headY-.16,h.headR*.78)];
     const smile=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(smilePts),12,.009,6,false),lip);avatar.add(smile);
     const cap=sphere(avatar,hair,0,h.headY+h.headR*.53,-.015,h.headR*1.03,h.headR*.68,h.headR*.94);
