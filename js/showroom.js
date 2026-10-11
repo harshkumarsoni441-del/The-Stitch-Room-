@@ -47,6 +47,7 @@
   const platformRing=new THREE.Mesh(new THREE.TorusGeometry(1.07,.012,8,80),new THREE.MeshStandardMaterial({color:0xb7b6a6,metalness:.25,roughness:.45}));platformRing.rotation.x=Math.PI/2;platformRing.position.y=.085;scene.add(platformRing);
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:0xf2f0e8,roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=-.015;floor.receiveShadow=true;scene.add(floor);
 
+
   const mat=(color,roughness=.78)=>new THREE.MeshStandardMaterial({color,roughness});
   function addMesh(parent,geometry,material,pos,scale){const mesh=new THREE.Mesh(geometry,material);mesh.position.set(pos[0],pos[1],pos[2]);if(scale)mesh.scale.set(scale[0],scale[1],scale[2]);mesh.castShadow=true;mesh.receiveShadow=true;parent.add(mesh);return mesh;}
   function cylinder(parent,rt,rb,h,material,x,y,z,segments=24){return addMesh(parent,new THREE.CylinderGeometry(rt,rb,h,segments,1),material,[x,y,z]);}
